@@ -17,9 +17,7 @@ workflow BWA_ALIGN_READS {
   ch_versions = ch_versions.mix(ALIGN_READS.out.versions)
 
   emit:
-  //merge_fastq              = MERGE_FASTQ.out 
   aligned_bam              = ALIGN_READS.out[0]
-  aligned_bam.view()
   versions                 = ch_versions
 
 }
