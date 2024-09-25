@@ -24,7 +24,7 @@ workflow GATK_BEST_PRACTICES {
 
   emit:
   marked_dup_bam           = MARK_DUPLICATES.out[0]
-  bqsr_recal_table         = BASE_RECALIBRATOR.out.[0]
+  bqsr_recal_table         = BASE_RECALIBRATOR.out[0]
 
   versions                 = ch_versions
 }
