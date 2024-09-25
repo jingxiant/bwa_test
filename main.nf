@@ -21,14 +21,20 @@ ref_fai = file(params.ref_fai)
 ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
 */
 
-include {TARGETED_ANALYSIS} from "./workflows/targeted_analysis"
-
 /*
 ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
     FUNCTIONS
 ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
 */
 
+//
+// Get sample id
+//
+/*def getLibraryId( file ) {
+        file.split(/\//)[-1].split(/_/)[0]
+}*/
+
+include {TARGETED_ANALYSIS} from "./workflows/targeted_analysis"
 
 workflow PRISM_TARGETED_ANALYSIS {
 
