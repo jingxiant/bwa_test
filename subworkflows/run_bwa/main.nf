@@ -1,7 +1,7 @@
 include { MERGE_FASTQ } from "../../modules/merge_fastq"
 include { ALIGN_READS } from "../../modules/merge_fastq"
 
-workflow ALIGN_READS {
+workflow BWA_ALIGN_READS {
   take:
   reads
   ref_genome
