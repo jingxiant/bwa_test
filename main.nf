@@ -34,7 +34,7 @@ workflow PRISM_TARGETED_ANALYSIS {
 
     main:
 
-    ch_versions = Channel.empty()
+    //ch_versions = Channel.empty()
 
     Channel
         .fromFilePairs( params.reads, flat: true )
@@ -47,7 +47,7 @@ workflow PRISM_TARGETED_ANALYSIS {
         ref_fa, 
         ref_fai
     )
-    ch_versions = ch_versions.mix(TARGETED_ANALYSIS.out.versions)
+    //ch_versions = ch_versions.mix(TARGETED_ANALYSIS.out.versions)
 }
 
 workflow {
