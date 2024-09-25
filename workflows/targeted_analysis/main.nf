@@ -62,5 +62,6 @@ workflow TARGETED_ANALYSIS {
         //BWA_ALIGN_READS.out.aligned_bam
         //GATK_BEST_PRACTICES.out.marked_dup_bam
         GATK_BEST_PRACTICES.out.bqsr_recal_table
+        GATK_BEST_PRACTICES.out.bqsr_bam
         versions = ch_versions
 }
