@@ -37,7 +37,9 @@ workflow PRISM_TARGETED_ANALYSIS {
         .set {reads}
 
     TARGETED_ANALYSIS(
-        reads, ref_fa, ref_fai
+        reads, 
+        ref_fa, 
+        ref_fai
     )
     ch_versions = ch_versions.mix(TARGETED_ANALYSIS.out.versions)
 }
