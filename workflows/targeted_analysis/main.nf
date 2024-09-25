@@ -20,10 +20,12 @@ include {BWA_ALIGN_READS} from "../../subworkflows/run_bwa"
 // WORKFLOW: Run main analysis pipeline
 //
 workflow TARGETED_ANALYSIS {
+    
     take:
     reads
     ref_genome
     ref_genome_index
+    ch_versions
 
     main:
 
@@ -32,9 +34,11 @@ workflow TARGETED_ANALYSIS {
         ref_genome,
         ref_genome_index
     )
+    ch_versions = ch_versions.mix(BWA_ALIGN_READS.out.versions)
 
     emit:
         BWA_ALIGN_READS.out.aligned_bam
+        versions = ch_versions
     
 
 }
