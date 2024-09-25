@@ -37,12 +37,6 @@ def getLibraryId( file ) {
         file.split(/\//)[-1].split(/_/)[0]
 }
 
-/*
-~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
-    THE END
-~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
-*/
-
 workflow PRISM_TARGETED_ANALYSIS {
     
     main:
@@ -61,6 +55,11 @@ workflow PRISM_TARGETED_ANALYSIS {
         ref_fai
     )
     ch_versions = ch_versions.mix(TARGETED_ANALYSIS.out.versions)
+}
+
+workflow {
+    main: 
+    PRISM_TARGETED_ANALYSIS()
 }
 
 
