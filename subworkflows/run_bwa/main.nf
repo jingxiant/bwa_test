@@ -1,5 +1,5 @@
 include { MERGE_FASTQ } from "../../modules/merge_fastq"
-include { ALIGN_READS } from "../../modules/merge_fastq"
+include { ALIGN_READS } from "../../modules/bwa"
 
 workflow BWA_ALIGN_READS {
   take:
