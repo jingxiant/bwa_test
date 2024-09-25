@@ -9,17 +9,17 @@ workflow BWA_ALIGN_READS {
 
   main:
 
-  //ch_versions = Channel.empty()
+  ch_versions = Channel.empty()
 
   MERGE_FASTQ(reads)
   ALIGN_READS(MERGE_FASTQ.out, ref_genome, ref_genome_index)
   
-  //ch_versions = ch_versions.mix(ALIGN_READS.out.versions)
+  ch_versions = ch_versions.mix(ALIGN_READS.out.versions)
 
   emit:
   //merge_fastq              = MERGE_FASTQ.out 
   aligned_bam              = ALIGN_READS.out.first()
 
-  //versions                 = ch_versions
+  versions                 = ch_versions
 
 }
