@@ -9,7 +9,7 @@ nextflow.enable.dsl = 2
 */
 
 ref_fa = file(params.ref)
-ref_fai = file(params.ref_fai
+ref_fai = file(params.ref_fai)
 
 /*
 ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
