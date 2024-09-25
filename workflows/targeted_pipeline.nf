@@ -8,4 +8,5 @@
 // MODULE: Loaded from modules/
 //
 
-include ../../modules/
+include {} from "../../modules/bwa"
+include {} from "../../modules/merge_fastq"
