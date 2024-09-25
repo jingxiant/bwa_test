@@ -59,6 +59,4 @@ workflow TARGETED_ANALYSIS {
         GATK_BEST_PRACTICES.out.marked_dup_bam
         GATK_BEST_PRACTICES.out.bqsr_recal_table
         versions = ch_versions
-    
-
 }
