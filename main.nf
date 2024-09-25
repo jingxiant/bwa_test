@@ -18,6 +18,8 @@ known_snps_dbsnp = file(params.known_snps_dbsnp)
 known_snps_dbsnp_index = file(params.known_snps_dbsnp + '.tbi')
 known_indels_dbsnp = file(params.known_indels)
 known_indels_dbsnp_index = file(params.known_indels + '.tbi')
+target_bed = file(params.target_bed)
+target_bed_covered = file(params.target_bed_covered)
 
 /*
 ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
