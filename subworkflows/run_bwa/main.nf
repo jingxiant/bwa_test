@@ -18,7 +18,7 @@ workflow BWA_ALIGN_READS {
 
   emit:
   //merge_fastq              = MERGE_FASTQ.out 
-  aligned_bam              = ALIGN_READS.out
+  aligned_bam              = ALIGN_READS.out.first()
 
   versions                 = ch_versions
 
