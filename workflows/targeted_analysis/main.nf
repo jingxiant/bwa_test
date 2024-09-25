@@ -40,7 +40,7 @@ workflow TARGETED_ANALYSIS {
         ref_genome,
         ref_genome_index
     )
-    ch_versions = ch_versions.mix(BWA_ALIGN_READS.out.versions)
+    ch_versions = ch_versions.mix(BWA_ALIGN_READS.out.versions.first())
 
     ch_aligned_bam = BWA_ALIGN_READS.out.aligned_bam
     GATK_BEST_PRACTICES(
