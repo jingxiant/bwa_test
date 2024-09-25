@@ -31,7 +31,7 @@ include {TARGETED_ANALYSIS} from "./workflows/targeted_analysis"
 
 
 workflow PRISM_TARGETED_ANALYSIS {
-    
+
     main:
 
     ch_versions = Channel.empty()
@@ -51,6 +51,7 @@ workflow PRISM_TARGETED_ANALYSIS {
 }
 
 workflow {
+
     main: 
     PRISM_TARGETED_ANALYSIS()
 }
