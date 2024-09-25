@@ -19,7 +19,7 @@ include {BWA_ALIGN_READS} from "../../subworkflows/run_bwa"
 //
 // WORKFLOW: Run main analysis pipeline
 //
-workflow PRISM_TARGETED_ANALYSIS {
+workflow TARGETED_ANALYSIS {
     take:
     reads
     ref_genome
