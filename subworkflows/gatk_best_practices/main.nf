@@ -27,6 +27,9 @@ workflow GATK_BEST_PRACTICES {
   APPLY_BQSR(MARK_DUPLICATES.out[0].join(BASE_RECALIBRATOR.out[0]), ref_genome, ref_genome_index)
   ch_versions = ch_versions.mix(APPLY_BQSR.out.versions)
 
+  HAPLOTYPECALLER(APPLY_BQSR_WES.out[0], ref_genome, ref_genome_index, known_snps_dbsnp_index, known_indels_index, known_snps_dbsnp, known_indels, target_bed)
+  ch_versions = ch_versions.mix(HAPLOTYPECALLER.out.versions)
+  
   emit:
   marked_dup_bam           = MARK_DUPLICATES.out[0]
   bqsr_recal_table         = BASE_RECALIBRATOR.out[0]
