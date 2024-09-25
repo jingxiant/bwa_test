@@ -40,7 +40,7 @@ workflow PRISM_TARGETED_ANALYSIS {
 
     main:
 
-    //ch_versions = Channel.empty()
+    ch_versions = Channel.empty()
 
     Channel
         .fromFilePairs( params.reads, flat: true )
