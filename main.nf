@@ -26,10 +26,6 @@ workflow PRISM_TARGETED_ANALYSIS {
 
     ch_versions = Channel.empty()
 
-    def getLibraryId( file ) {
-        file.split(/\//)[-1].split(/_/)[0]
-    }
-
     Channel
         .fromFilePairs( params.reads, flat: true )
         .map { prefix, file1, file2 -> tuple(getLibraryId(prefix), file1, file2) }
@@ -44,5 +40,24 @@ workflow PRISM_TARGETED_ANALYSIS {
     ch_versions = ch_versions.mix(TARGETED_ANALYSIS.out.versions)
 }
 
+/*
+~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+    FUNCTIONS
+~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+*/
+
+//
+// Get sample id
+//
+
+def getLibraryId( file ) {
+        file.split(/\//)[-1].split(/_/)[0]
+    }
+
+/*
+~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+    THE END
+~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+*/
 
     
