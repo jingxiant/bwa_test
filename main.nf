@@ -14,10 +14,10 @@ params.ref_fai = "/prism_data5/share/GATK_Bundle/hg38/newref/Homo_sapiens_assemb
 
 ref_fa = file(params.ref)
 ref_fai = file(params.ref_fai)
-known_snps_dbnsfp = file(params.known_snps_dbnsfp)
+known_snps_dbsnp = file(params.known_snps_dbsnp)
 known_snps_dbsnp_index = file(params.known_snps_dbsnp + '.tbi')
-known_indels_dbnsfp = file(params.known_indels)
-known_indels_index = file(params.known_indels + '.tbi')
+known_indels_dbsnp = file(params.known_indels)
+known_indels_dbsnp_index = file(params.known_indels + '.tbi')
 
 /*
 ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
@@ -56,10 +56,10 @@ workflow PRISM_TARGETED_ANALYSIS {
         reads, 
         ref_fa, 
         ref_fai,
-        known_snps_dbnsfp,
-        known_indels_dbnsfp,
+        known_snps_dbsnp,
+        known_indels_dbsnp,
         known_snps_dbsnp_index,
-        known_indels_index,
+        known_indels_dbsnp_index,
         target_bed,
         ch_versions
     )
