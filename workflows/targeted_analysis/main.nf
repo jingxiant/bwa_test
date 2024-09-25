@@ -45,6 +45,8 @@ workflow TARGETED_ANALYSIS {
     ch_aligned_bam = BWA_ALIGN_READS.out.aligned_bam
     GATK_BEST_PRACTICES(
         ch_aligned_bam,
+        ref_genome,
+        ref_genome_index,
         known_snps_dbsnp,
         known_indels,
         known_snps_dbsnp_index,
