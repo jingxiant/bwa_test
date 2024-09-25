@@ -8,7 +8,7 @@
 // MODULE: Loaded from modules/
 //
 
-include {BWA_ALIGN_READS} from "../../subworkflows/run_bwa"
+include {BWA_ALIGN_READS} from "../../subworkflows/align_bwa"
 
 /*
 ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
