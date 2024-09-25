@@ -48,7 +48,7 @@ workflow TARGETED_ANALYSIS {
         known_snps_dbsnp,
         known_indels,
         known_snps_dbsnp_index,
-        known_indels_indexm,
+        known_indels_index,
         target_bed
     )
     ch_versions = ch_versions.mix(GATK_BEST_PRACTICES.out.versions)
