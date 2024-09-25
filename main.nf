@@ -32,10 +32,9 @@ include {TARGETED_ANALYSIS} from "./workflows/targeted_analysis"
 //
 // Get sample id
 //
-
-def getLibraryId( file ) {
+/*def getLibraryId( file ) {
         file.split(/\//)[-1].split(/_/)[0]
-}
+}*/
 
 workflow PRISM_TARGETED_ANALYSIS {
     
