@@ -35,6 +35,9 @@ workflow TARGETED_ANALYSIS {
 
     main:
 
+    ch_versions = Channel.empty()
+    ch_aligned_bam = Channel.empty()
+    
     BWA_ALIGN_READS(
         reads,
         ref_genome,
