@@ -2,9 +2,9 @@
 
 nextflow.enable.dsl = 2
 
-params.reads: "*_R{1,2}.{fq,fastq}.gz"
-params.ref: "/prism_data5/share/GATK_Bundle/hg38/newref/Homo_sapiens_assembly38.fasta"
-params.ref_fai: "/prism_data5/share/GATK_Bundle/hg38/newref/Homo_sapiens_assembly38.fasta.fai"
+params.reads   = "*_R{1,2}.{fq,fastq}.gz"
+params.ref     = "/prism_data5/share/GATK_Bundle/hg38/newref/Homo_sapiens_assembly38.fasta"
+params.ref_fai = "/prism_data5/share/GATK_Bundle/hg38/newref/Homo_sapiens_assembly38.fasta.fai"
 
 /*
 ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
