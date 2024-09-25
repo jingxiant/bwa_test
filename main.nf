@@ -52,7 +52,7 @@ workflow PRISM_TARGETED_ANALYSIS {
 
 def getLibraryId( file ) {
         file.split(/\//)[-1].split(/_/)[0]
-    }
+}
 
 /*
 ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
