@@ -26,7 +26,7 @@ workflow TARGETED_ANALYSIS {
     reads
     ref_genome
     ref_genome_index
-    ch_aligned_bam
+    //ch_aligned_bam
     known_snps_dbsnp
     known_indels
     known_snps_dbsnp_index
