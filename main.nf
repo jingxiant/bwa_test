@@ -52,6 +52,11 @@ workflow PRISM_TARGETED_ANALYSIS {
         reads, 
         ref_fa, 
         ref_fai,
+        known_snps_dbsnp,
+        known_indels,
+        known_snps_dbsnp_index,
+        known_indels_index,
+        target_bed,
         ch_versions
     )
     ch_versions = ch_versions.mix(TARGETED_ANALYSIS.out.versions)
