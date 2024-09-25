@@ -19,12 +19,12 @@ workflow GATK_BEST_PRACTICES {
   MARK_DUPLICATES(ch_aligned_bam)
   ch_versions = ch_versions.mix(MARK_DUPLICATES.out.versions)
   
-  BASE_RECALIBRATOR(MARK_DUPLICATES.out[0], ref_genome, ref_genome_index, known_snps_dbsnp_index, known_indels_index, known_snps_dbsnp, known_indels, target_bed)
+  BASE_RECALIBRATOR(MARK_DUPLICATES.out, ref_genome, ref_genome_index, known_snps_dbsnp_index, known_indels_index, known_snps_dbsnp, known_indels, target_bed)
   ch_versions = ch_versions.mix(BASE_RECALIBRATOR.out.versions)
 
   emit:
-  marked_dup_bam           = MARK_DUPLICATES.out
-  bqsr_recal_table         = BASE_RECALIBRATOR.out
+  marked_dup_bam           = MARK_DUPLICATES.out.first()
+  bqsr_recal_table         = BASE_RECALIBRATOR.out.first()
 
   versions                 = ch_versions
 }
