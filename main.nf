@@ -91,7 +91,7 @@ workflow PRISM_TARGETED_ANALYSIS {
         exomedepth_control,
         exomedepth_target_bed,
         exomedepth_gene_bed,
-        chr_list,
+        chr,
         ch_versions
     )
     ch_versions = ch_versions.mix(TARGETED_ANALYSIS.out.versions)
