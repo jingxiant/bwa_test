@@ -4,7 +4,7 @@ process SVAFOTATE_FOR_EXOMEDEPTH {
         errorStrategy 'ignore'
 
         input:
-        path(exomedepth_filtered_tsv)
+        file(exomedepth_filtered_tsv)
         file(convert_tsv_to_vcf_script)
         file(svafotate_bed)
 
