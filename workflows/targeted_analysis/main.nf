@@ -78,5 +78,6 @@ workflow TARGETED_ANALYSIS {
         GATK_BEST_PRACTICES.out.gvcf_index
         GATK_BEST_PRACTICES.out.raw_vcf
         VCF_FILTER_AND_DECOMPOSE.out.filtered_vcfs
+        VCF_FILTER_AND_DECOMPOSE.out.decom_norm_vcf
         versions = ch_versions
 }
