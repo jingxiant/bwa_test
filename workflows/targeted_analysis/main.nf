@@ -63,5 +63,7 @@ workflow TARGETED_ANALYSIS {
         //GATK_BEST_PRACTICES.out.marked_dup_bam
         GATK_BEST_PRACTICES.out.bqsr_recal_table
         GATK_BEST_PRACTICES.out.bqsr_bam
+        GATK_BEST_PRACTICES.out.gvcf_file
+        GATK_BEST_PRACTICES.out.gvcf_index
         versions = ch_versions
 }
