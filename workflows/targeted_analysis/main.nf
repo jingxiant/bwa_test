@@ -148,5 +148,6 @@ workflow TARGETED_ANALYSIS {
         EXOMEDEPTH_CNV_CALLING.out.exomedepth_tsv
         EXOMEDEPTH_CNV_CALLING.out.exomedepth_png
         EXOMEDEPTH_CNV_CALLING.out.exomedepth_rds
+        EXOMEDEPTH_CNV_CALLING.out.exomedepth_merged_tsv
         versions = ch_versions
 }
