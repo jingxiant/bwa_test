@@ -72,6 +72,7 @@ workflow PRISM_TARGETED_ANALYSIS {
         known_snps_dbsnp_index,
         known_indels_dbsnp_index,
         target_bed,
+        target_bed_covered
         vep_cache,
         vep_plugins,
         vcf_to_tsv_script,
