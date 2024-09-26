@@ -20,6 +20,8 @@ known_indels_dbsnp = file(params.known_indels)
 known_indels_dbsnp_index = file(params.known_indels + '.tbi')
 target_bed = file(params.target_bed)
 target_bed_covered = file(params.target_bed_covered)
+vep_cache = file(params.vep_cache_dir)
+vep_plugins = file(params.vep_plugin_dir)
 
 /*
 ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
@@ -63,6 +65,8 @@ workflow PRISM_TARGETED_ANALYSIS {
         known_snps_dbsnp_index,
         known_indels_dbsnp_index,
         target_bed,
+        vep_cache,
+        vep_plugins,
         ch_versions
     )
     ch_versions = ch_versions.mix(TARGETED_ANALYSIS.out.versions)
