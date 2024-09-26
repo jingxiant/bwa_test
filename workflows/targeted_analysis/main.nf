@@ -126,8 +126,8 @@ workflow TARGETED_ANALYSIS {
         ref_genome_index,
         exomedepth_target_bed,
         exomedepth_gene_bed,
-        chr_list
-        convert_tsv_to_vcf_script_for_exomedepth
+        chr_list,
+        convert_tsv_to_vcf_script_for_exomedepth,
         svafotate_bed
     )
     ch_versions = ch_versions.mix(EXOMEDEPTH_CNV_CALLING.out.versions)
