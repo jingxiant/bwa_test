@@ -94,8 +94,8 @@ workflow PRISM_TARGETED_ANALYSIS {
         exomedepth_target_bed,
         exomedepth_gene_bed,
         chr,
-        svafotate_bed,
         convert_tsv_to_vcf_script,
+        svafotate_bed,
         ch_versions
     )
     ch_versions = ch_versions.mix(TARGETED_ANALYSIS.out.versions)
