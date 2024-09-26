@@ -60,6 +60,9 @@ workflow TARGETED_ANALYSIS {
     exomedepth_deletion_db
     exomedepth_duplication_db
     add_svaf_script
+    process_script_single
+    panel
+    decipher
 
     ch_versions
 
@@ -148,6 +151,7 @@ workflow TARGETED_ANALYSIS {
         svafotate_bed
     )
 
+    ch_vep_tsv_filtered_for_joining = VEP_ANNOTATE.out.vep_tsv_filtered
     EXOMEDEPTH_POSTPROCESS(
         ch_merged_tsv,
         SVAFOTATE.out.svafotate_vcf,
@@ -155,6 +159,12 @@ workflow TARGETED_ANALYSIS {
         exomedepth_deletion_db,
         exomedepth_duplication_db,
         add_svaf_script
+        ch_vep_tsv_filtered_for_joining
+        process_script_single
+        panel
+        clingen
+        mutation_spectrum
+        decipher
     )
     
     emit:
@@ -180,5 +190,7 @@ workflow TARGETED_ANALYSIS {
         EXOMEDEPTH_CNV_CALLING.out.exomedepth_merged_tsv
         SVAFOTATE.out.svafotate_vcf
         EXOMEDEPTH_POSTPROCESS.out.exomedepth_merged_filtered_tsv
+        EXOMEDEPTH_POSTPROCESS.out.exomedepth_postprocess_tsv
+
         versions = ch_versions
 }
