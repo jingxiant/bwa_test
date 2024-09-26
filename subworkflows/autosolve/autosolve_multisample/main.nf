@@ -1,5 +1,4 @@
 include { AUTOSOLVE_TIER1_TIER2_MULTISAMPLE } from "../../modules/autosolve_multisample"
-include { AUTOSOLVE_TIER1_TIER2_TRIO } from "../../modules/autosolve_family"
 
 workflow AUTOSOLVE_MULTISAMPLE {
 
