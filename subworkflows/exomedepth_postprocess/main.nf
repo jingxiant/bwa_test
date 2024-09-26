@@ -1,4 +1,5 @@
 include { EXOMEDEPTH_FILTER_MERGE_TSV } from "../../modules/exomedepth/filter_merged_tsv"
+include { EXOMEDEPTH_POSTPROCESS_SINGLE } from "../../modules/exomedepth/postprocess_single"
 
 workflow EXOMEDEPTH_POSTPROCESS {
 
@@ -9,11 +10,23 @@ workflow EXOMEDEPTH_POSTPROCESS {
   exomedepth_deletion_db
   exomedepth_duplication_db
   add_svaf_script
+  process_script_single
+  panel
+  clingen
+  mutation_spectrum
+  decipher
 
   main:
   EXOMEDEPTH_FILTER_MERGE_TSV(exomedepth_merged_tsv, svafotate_vcf, exomedepth_annotate_counts_script, exomedepth_deletion_db, exomedepth_duplication_db, add_svaf_script)
 
+  /*EXOMEDEPTH_FILTER_MERGE_TSV.out.flatten()
+        .map {file -> [file.simpleName, file]}
+        .set { exomedepth_ch }*/
+
+  EXOMEDEPTH_POSTPROCESS_SINGLE()
+
   emit:
   exomedepth_merged_filtered_tsv  = EXOMEDEPTH_FILTER_MERGE_TSV.out
+  exomedepth_postprocess_tsv      = EXOMEDEPTH_POSTPROCESS_SINGLE.out
   
 }
