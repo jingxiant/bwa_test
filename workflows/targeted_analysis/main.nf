@@ -8,9 +8,10 @@
 // MODULE: Loaded from modules/
 //
 
-include {BWA_ALIGN_READS} from "../../subworkflows/align_bwa"
-include {GATK_BEST_PRACTICES} from "../../subworkflows/gatk_best_practices"
-include {VCF_FILTER_AND_DECOMPOSE} from "../../subworkflows/vcf_filter_and_decompose"
+include { BWA_ALIGN_READS } from "../../subworkflows/align_bwa"
+include { GATK_BEST_PRACTICES } from "../../subworkflows/gatk_best_practices"
+include { VCF_FILTER_AND_DECOMPOSE } from "../../subworkflows/vcf_filter_and_decompose"
+include { VEP_ANNOTATE } from "../../subworkflows/vcf_annotation"
 
 /*
 ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
@@ -32,6 +33,8 @@ workflow TARGETED_ANALYSIS {
     known_snps_dbsnp_index
     known_indels_index
     target_bed
+    vep_cache
+    vep_plugins
     ch_versions
 
     main:
@@ -46,7 +49,6 @@ workflow TARGETED_ANALYSIS {
     ch_versions = ch_versions.mix(BWA_ALIGN_READS.out.versions)
 
     ch_aligned_bam = BWA_ALIGN_READS.out.aligned_bam
-
     GATK_BEST_PRACTICES(
         ch_aligned_bam,
         ref_genome,
@@ -60,7 +62,6 @@ workflow TARGETED_ANALYSIS {
     ch_versions = ch_versions.mix(GATK_BEST_PRACTICES.out.versions)
 
     ch_raw_vcf = GATK_BEST_PRACTICES.out.raw_vcf
-
     VCF_FILTER_AND_DECOMPOSE(
         ch_raw_vcf,
         ref_genome,
@@ -68,6 +69,10 @@ workflow TARGETED_ANALYSIS {
     )
 
     ch_versions = ch_versions.mix(VCF_FILTER_AND_DECOMPOSE.out.versions)
+
+    ch_decom_norm_vcf = VCF_FILTER_AND_DECOMPOSE.out.decom_norm_vcf
+    VEP_ANNOTATE(ch_decom_norm_vcf, vep_cache, vep_plugins)
+    ch_versions = ch_versions.mix(VEP_ANNOTATE.out.versions)
 
     emit:
         //BWA_ALIGN_READS.out.aligned_bam
@@ -79,5 +84,6 @@ workflow TARGETED_ANALYSIS {
         GATK_BEST_PRACTICES.out.raw_vcf
         VCF_FILTER_AND_DECOMPOSE.out.filtered_vcfs
         VCF_FILTER_AND_DECOMPOSE.out.decom_norm_vcf
+        VEP_ANNOTATE.out.annotated_vcf
         versions = ch_versions
 }
