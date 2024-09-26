@@ -29,6 +29,7 @@ mutation_spectrum = file(params.mutation_spectrum)
 autosolve_script = file(params.autosolve_script)
 panel_monoallelic = file(params.panel_monoallelic)
 panel_biallelic = file(params.panel_biallelic)
+refseq_gene_track = file(params.refseq_gene_track:)
 
 /*
 ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
@@ -82,6 +83,7 @@ workflow PRISM_TARGETED_ANALYSIS {
         panel_biallelic,
         clingen,
         mutation_spectrum,
+        refseq_gene_track,
         ch_versions
     )
     ch_versions = ch_versions.mix(TARGETED_ANALYSIS.out.versions)
