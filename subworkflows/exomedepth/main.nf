@@ -24,7 +24,7 @@ workflow EXOMEDEPTH_CNV_CALLING {
 
   emit:
   sample_list_for_exomedepth   = GET_SAMPLES_FOR_EXOMEDEPTH.out[0]
-  exomedepth_tsv               = EXOMEDEPTH_KNOWN_TEST_SPLITCHR.out[1]
+  exomedepth_tsv               = EXOMEDEPTH_KNOWN_TEST_SPLITCHR.out[1].collect()
   exomedepth_png               = EXOMEDEPTH_KNOWN_TEST_SPLITCHR.out[2]
   exomedepth_rds               = EXOMEDEPTH_KNOWN_TEST_SPLITCHR.out[3]
   exomedepth_merged_tsv        = EXOMEDEPTH_MERGE_TSV.out
