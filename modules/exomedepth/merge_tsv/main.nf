@@ -5,8 +5,9 @@ process EXOMEDEPTH_MERGE_TSV {
     
     input:
     path(tsv)
+
     output:
-      path("*.exomedepth.merged.tsv")
+    path("*.exomedepth.merged.tsv")
         
     """
     #!/usr/bin/env python
