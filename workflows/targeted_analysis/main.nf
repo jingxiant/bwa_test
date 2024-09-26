@@ -88,7 +88,7 @@ workflow TARGETED_ANALYSIS {
     )
     ch_versions = ch_versions.mix(VEP_ANNOTATE.out.versions)
 
-    ch_vep_tsv_filtered = VEP_ANNOTATE.out.vep_tsv_filtered
+    ch_vep_tsv_filtered = VEP_ANNOTATE.out.vep_tsv_filtered.groupTuple()
     AUTOSOLVE_MULTISAMPLE(
         ch_vep_tsv_filtered,
         autosolve_script,
