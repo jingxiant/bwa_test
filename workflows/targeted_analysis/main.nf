@@ -35,6 +35,8 @@ workflow TARGETED_ANALYSIS {
     target_bed
     vep_cache
     vep_plugins
+    vcf_to_tsv_script
+    mane_transcript
     ch_versions
 
     main:
@@ -65,13 +67,19 @@ workflow TARGETED_ANALYSIS {
     VCF_FILTER_AND_DECOMPOSE(
         ch_raw_vcf,
         ref_genome,
-        ref_genome_index,
+        ref_genome_index
     )
 
     ch_versions = ch_versions.mix(VCF_FILTER_AND_DECOMPOSE.out.versions)
 
     ch_decom_norm_vcf = VCF_FILTER_AND_DECOMPOSE.out.decom_norm_vcf
-    VEP_ANNOTATE(ch_decom_norm_vcf, vep_cache, vep_plugins)
+    VEP_ANNOTATE(
+        ch_decom_norm_vcf,
+        vep_cache,
+        vep_plugins,
+        vcf_to_tsv_script,
+        mane_transcript
+    )
     ch_versions = ch_versions.mix(VEP_ANNOTATE.out.versions)
 
     emit:
@@ -85,5 +93,8 @@ workflow TARGETED_ANALYSIS {
         VCF_FILTER_AND_DECOMPOSE.out.filtered_vcfs
         VCF_FILTER_AND_DECOMPOSE.out.decom_norm_vcf
         VEP_ANNOTATE.out.annotated_vcf
+        VEP_ANNOTATE.out.vep_tsv
+        VEP_ANNOTATE.out.vep_tsv_filtered
+        VEP_ANNOTATE.out.vep_tsv_filtered_highqual
         versions = ch_versions
 }
