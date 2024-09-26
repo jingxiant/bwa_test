@@ -1,4 +1,4 @@
-process GENOTYPEGVCFS_WES{
+process GENOTYPEGVCFS {
 
         container 'jxprismdocker/prism_bwa_gatk'
         publishDir "$params.publishdir/jointcalling", mode: 'copy', exclude: '*.yml'
