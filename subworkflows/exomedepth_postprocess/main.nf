@@ -1,6 +1,6 @@
 include { EXOMEDEPTH_FILTER_MERGE_TSV } from "../../modules/exomedepth/filter_merged_tsv"
 include { EXOMEDEPTH_POSTPROCESS_SINGLE } from "../../modules/exomedepth/postprocess_single"
-include { EXOMEDEPTH_POSTPROCESS_FAMILY } from "../../modules/exomedepth/postprocess_cohort"
+include { EXOMEDEPTH_POSTPROCESS_COHORT } from "../../modules/exomedepth/postprocess_cohort"
 
 workflow EXOMEDEPTH_POSTPROCESS {
 
