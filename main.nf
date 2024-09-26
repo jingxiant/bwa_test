@@ -29,7 +29,7 @@ mutation_spectrum = file(params.mutation_spectrum)
 autosolve_script = file(params.autosolve_script)
 panel_monoallelic = file(params.panel_monoallelic)
 panel_biallelic = file(params.panel_biallelic)
-refseq_gene_track = file(params.refseq_gene_track:)
+refseq_gene_track = file(params.refseq_gene_track)
 
 /*
 ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
