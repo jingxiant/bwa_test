@@ -16,7 +16,7 @@ include { AUTOSOLVE_MULTISAMPLE } from "../../subworkflows/autosolve/autosolve_m
 include { BAM_QC } from "../../subworkflows/bam_qc"
 include { EXOMEDEPTH_CNV_CALLING } from "../../subworkflows/exomedepth"
 include { EXOMEDEPTH_CNV_CALLING } from "../../subworkflows/exomedepth"
-include { SVAFOTATE } from "../../subworkflows/svafoatte"
+include { SVAFOTATE } from "../../subworkflows/svafotate"
 
 /*
 ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
