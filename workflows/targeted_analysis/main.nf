@@ -196,7 +196,8 @@ workflow TARGETED_ANALYSIS {
         SVAFOTATE.out.svafotate_vcf
         EXOMEDEPTH_POSTPROCESS.out.exomedepth_merged_filtered_tsv
         EXOMEDEPTH_POSTPROCESS.out.exomedepth_postprocess_tsv
-        //EXOMEDEPTH_POSTPROCESS.out.exomedepth_postprocess_cohort_tsv
+        EXOMEDEPTH_POSTPROCESS.out.exomedepth_del_tsv_forgseapy
+        EXOMEDEPTH_POSTPROCESS.out.eexomedepth_dup_tsv_forgseapy
 
         versions = ch_versions
 }
