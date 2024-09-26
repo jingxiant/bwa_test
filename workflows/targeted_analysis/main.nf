@@ -14,6 +14,7 @@ include { VCF_FILTER_AND_DECOMPOSE } from "../../subworkflows/vcf_filter_and_dec
 include { VEP_ANNOTATE } from "../../subworkflows/vep_annotation"
 include { AUTOSOLVE_MULTISAMPLE } from "../../subworkflows/autosolve/autosolve_multisample"
 include { BAM_QC } from "../../subworkflows/bam_qc"
+include { EXOMEDEPTH_CNV_CALLING } from "../../subworkflows/exomedepth"
 
 /*
 ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
@@ -101,15 +102,20 @@ workflow TARGETED_ANALYSIS {
         mutation_spectrum
     )
 
-    ch_vep_tsv_filtered = GATK_BEST_PRACTICES.out.bqsr_bam
+    ch_bqsr_bam = GATK_BEST_PRACTICES.out.bqsr_bam
     BAM_QC(
-        ch_vep_tsv_filtered,
+        ch_bqsr_bam,
         target_bed_covered,
         ref_genome,
         ref_genome_index,
         refgene_track
     )
     ch_versions = ch_versions.mix(BAM_QC.out.versions)
+
+    ch_bqsr_bam_collect = GATK_BEST_PRACTICES.out.bqsr_bam.collect()
+    EXOMEDEPTH_CNV_CALLING(
+        ch_bqsr_bam_collect
+    )
 
     emit:
         //BWA_ALIGN_READS.out.aligned_bam
