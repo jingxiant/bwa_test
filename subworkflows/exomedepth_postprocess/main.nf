@@ -34,10 +34,6 @@ workflow EXOMEDEPTH_POSTPROCESS {
 
   emit:
   exomedepth_merged_filtered_tsv    = EXOMEDEPTH_FILTER_MERGE_TSV.out
-  if(params.genotyping_mode == 'single'){
-    exomedepth_postprocess_tsv        = EXOMEDEPTH_POSTPROCESS_SINGLE.out
-  }
-  else if(params.genotyping_mode == 'joint'){
-    exomedepth_postprocess_cohort_tsv = EXOMEDEPTH_POSTPROCESS_COHORT.out
-  }
+  exomedepth_postprocess_tsv        = EXOMEDEPTH_POSTPROCESS_SINGLE.out
+  //exomedepth_postprocess_cohort_tsv = EXOMEDEPTH_POSTPROCESS_COHORT.out
 }
