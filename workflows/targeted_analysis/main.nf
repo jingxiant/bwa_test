@@ -47,11 +47,11 @@ workflow TARGETED_ANALYSIS {
     clingen
     mutation_spectrum
     refgene_track
-    ch_versions
     exomedepth_controls
     exomedepth_target_bed
     exomedepth_gene_bed
     chr_list
+    ch_versions
 
     main:
 
