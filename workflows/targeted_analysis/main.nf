@@ -53,9 +53,10 @@ workflow TARGETED_ANALYSIS {
     exomedepth_target_bed
     exomedepth_gene_bed
     chr_list
-    ch_versions
     convert_tsv_to_vcf_script_for_exomedepth
     svafotate_bed
+    ch_versions
+
 
     main:
 
