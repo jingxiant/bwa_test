@@ -26,14 +26,15 @@ workflow EXOMEDEPTH_POSTPROCESS {
     .set { exomedepth_ch }
 
   if(params.genotyping_mode == 'single'){
-    EXOMEDEPTH_POSTPROCESS_SINGLE(exomedepth_ch.join(ch_vcf_filtered_tsv), process_script_single, panel, clingen, mutation_spectrum, decipher)
+    aa = EXOMEDEPTH_POSTPROCESS_SINGLE(exomedepth_ch.join(ch_vcf_filtered_tsv), process_script_single, panel, clingen, mutation_spectrum, decipher)
   }
   else if(params.genotyping_mode == 'joint'){
-    EXOMEDEPTH_POSTPROCESS_COHORT(exomedepth_ch, ch_vcf_filtered_tsv, process_script_single, panel, clingen, mutation_spectrum, decipher)
+    aa = EXOMEDEPTH_POSTPROCESS_COHORT(exomedepth_ch, ch_vcf_filtered_tsv, process_script_single, panel, clingen, mutation_spectrum, decipher)
   }
 
   emit:
   exomedepth_merged_filtered_tsv    = EXOMEDEPTH_FILTER_MERGE_TSV.out
+  exomedepth_postprocess_tsv = aa
   exomedepth_postprocess_tsv        = EXOMEDEPTH_POSTPROCESS_SINGLE.out
   //exomedepth_postprocess_cohort_tsv = EXOMEDEPTH_POSTPROCESS_COHORT.out
 }
