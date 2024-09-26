@@ -30,14 +30,18 @@ workflow GATK_BEST_PRACTICES {
 
   HAPLOTYPECALLER(APPLY_BQSR.out[0], ref_genome, ref_genome_index, known_snps_dbsnp_index, known_indels_index, known_snps_dbsnp, known_indels, target_bed)
   ch_versions = ch_versions.mix(HAPLOTYPECALLER.out.versions)
-  
+
+  GENOTYPEGVCFS(HAPLOTYPECALLER.out[1].collect(),HAPLOTYPECALLER.out[2].collect(), ref_genome, target_bed, params.proband)
+  ch_versions = ch_versions.mix(GENOTYPEGVCFS.out.versions)
+
   emit:
   marked_dup_bam           = MARK_DUPLICATES.out[0]
   bqsr_recal_table         = BASE_RECALIBRATOR.out[0]
   bqsr_bam                 = APPLY_BQSR.out[0]
   gvcf_file                = HAPLOTYPECALLER.out[1]
   gvcf_index               = HAPLOTYPECALLER.out[2]
-
+  raw_vcf                  = GENOTYPEGVCFS.out[0]
+  
   versions                 = ch_versions
 }
 
