@@ -1,6 +1,6 @@
 include { HARDFILTER_VARIANTS } from "../../modules/hardfilter_variants"
 
-workflow VCF_FITLER_AND_DECOMPOSE {
+workflow VCF_FILTER_AND_DECOMPOSE {
 
   take:
   ch_raw_vcf
