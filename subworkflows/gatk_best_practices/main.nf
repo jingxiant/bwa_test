@@ -34,6 +34,8 @@ workflow GATK_BEST_PRACTICES {
   marked_dup_bam           = MARK_DUPLICATES.out[0]
   bqsr_recal_table         = BASE_RECALIBRATOR.out[0]
   bqsr_bam                 = APPLY_BQSR.out[0]
+  gvcf_file                = HAPLOTYPECALLER.out[1]
+  gvcf_index               = HAPLOTYPECALLER.out[2]
 
   versions                 = ch_versions
 }
