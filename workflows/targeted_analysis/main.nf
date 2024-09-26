@@ -133,8 +133,9 @@ workflow TARGETED_ANALYSIS {
         //svafotate_bed
     )
 
+    ch_merged_tsv = EXOMEDEPTH_CNV_CALLING.out.exomedepth_merged_tsv
     SVAFOTATE(
-        EXOMEDEPTH_CNV_CALLING.out.exomedepth_merged_tsv.flatten(),
+        ch_merged_tsv,
         convert_tsv_to_vcf_script_for_exomedepth,
         svafotate_bed
     )
