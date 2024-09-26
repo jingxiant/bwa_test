@@ -4,8 +4,8 @@ include { EXOMEDEPTH_KNOWN_TEST_SPLITCHR } from from "../../modules/exomedepth_k
 workflow EXOMEDEPTH_CNV_CALLING {
 
   take:
-  controls
   ch_apply_bqsr_bam
+  controls
   ref_genome
   ref_genome_index
   exomedepth_target_bed
