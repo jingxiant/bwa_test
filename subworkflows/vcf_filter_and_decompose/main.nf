@@ -19,6 +19,7 @@ workflow VCF_FILTER_AND_DECOMPOSE {
 
   emit:
   filtered_vcfs            = HARDFILTER_VARIANTS.out[0]
+  decom_norm_vcf           = DECOMPOSE_AND_NORMALIZE.out[0]
 
   versions                 = ch_versions
   
