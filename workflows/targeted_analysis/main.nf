@@ -10,6 +10,7 @@
 
 include {BWA_ALIGN_READS} from "../../subworkflows/align_bwa"
 include {GATK_BEST_PRACTICES} from "../../subworkflows/gatk_best_practices"
+include {VCF_FILTER_AND_DECOMPOSE} from "../../subworkflows/vcf_filter_and_decompose"
 
 /*
 ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
@@ -58,6 +59,16 @@ workflow TARGETED_ANALYSIS {
     )
     ch_versions = ch_versions.mix(GATK_BEST_PRACTICES.out.versions)
 
+    ch_raw_vcf = GATK_BEST_PRACTICES.out.raw_vcf
+
+    VCF_FILTER_AND_DECOMPOSE(
+        ch_raw_vcf,
+        ref_genome,
+        ref_genome_index,
+    )
+
+    ch_versions = ch_versions.mix(VCF_FILTER_AND_DECOMPOSE.out.versions)
+
     emit:
         //BWA_ALIGN_READS.out.aligned_bam
         //GATK_BEST_PRACTICES.out.marked_dup_bam
@@ -66,5 +77,6 @@ workflow TARGETED_ANALYSIS {
         GATK_BEST_PRACTICES.out.gvcf_file
         GATK_BEST_PRACTICES.out.gvcf_index
         GATK_BEST_PRACTICES.out.raw_vcf
+        VCF_FILTER_AND_DECOMPOSE.out.filtered_vcfs
         versions = ch_versions
 }
