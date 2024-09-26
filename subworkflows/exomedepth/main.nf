@@ -1,6 +1,6 @@
 include { GET_SAMPLES_FOR_EXOMEDEPTH } from "../../modules/get_sample_exomedepth"
 include { EXOMEDEPTH_KNOWN_TEST_SPLITCHR } from "../../modules/exomedepth/known_test_splitchr"
-include { EXOMEDEPTH_MERGE_TSV } from "../../modules/exomdepth/merge_tsv"
+include { EXOMEDEPTH_MERGE_TSV } from "../../modules/exomedepth/merge_tsv"
 
 workflow EXOMEDEPTH_CNV_CALLING {
 
