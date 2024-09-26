@@ -1,5 +1,5 @@
-include {GET_SAMPLES_FOR_EXOMEDEPTH } from "../../modules/get_sample_exomedepth"
-include { EXOMEDEPTH_KNOWN_TEST_SPLITCHR } from from "../../modules/exomedepth_known_test_splitchr"
+include { GET_SAMPLES_FOR_EXOMEDEPTH } from "../../modules/get_sample_exomedepth"
+include { EXOMEDEPTH_KNOWN_TEST_SPLITCHR } from "../../modules/exomedepth_known_test_splitchr"
 
 workflow EXOMEDEPTH_CNV_CALLING {
 
