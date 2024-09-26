@@ -30,6 +30,10 @@ autosolve_script = file(params.autosolve_script)
 panel_monoallelic = file(params.panel_monoallelic)
 panel_biallelic = file(params.panel_biallelic)
 refseq_gene_track = file(params.refseq_gene_track)
+exomedepth_control = file(params.exomedepth_control)
+exomedepth_target_bed = file(params.exomedepth_target_bed)
+exomedepth_gene_bed = file(params.exomedepth_gene_bed)
+chr = params.chr?.tokenize(',')
 
 /*
 ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
@@ -84,6 +88,10 @@ workflow PRISM_TARGETED_ANALYSIS {
         clingen,
         mutation_spectrum,
         refseq_gene_track,
+        exomedepth_controls,
+        exomedepth_target_bed,
+        exomedepth_gene_bed,
+        chr_list,
         ch_versions
     )
     ch_versions = ch_versions.mix(TARGETED_ANALYSIS.out.versions)
