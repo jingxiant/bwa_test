@@ -126,6 +126,7 @@ workflow TARGETED_ANALYSIS {
         exomedepth_gene_bed,
         chr_list
     )
+    EXOMEDEPTH_CNV_CALLING.out.exomedepth_tsv.view()
     ch_versions = ch_versions.mix(EXOMEDEPTH_CNV_CALLING.out.versions)
 
     emit:
