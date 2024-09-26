@@ -151,7 +151,12 @@ workflow TARGETED_ANALYSIS {
         svafotate_bed
     )
 
-    ch_vep_tsv_filtered_for_joining = VEP_ANNOTATE.out.vep_tsv_filtered
+    if(params.genotyping_mode == 'single'){
+        ch_for_exomedepth_postprocess = VEP_ANNOTATE.out.vep_tsv_filtered
+    }else if(params.genotyping_mode == 'joint'){
+        ch_for_exomedepth_postprocess = VEP_ANNOTATE.out.vep_tsv_filtered_without_samplename
+    }
+    
     EXOMEDEPTH_POSTPROCESS(
         ch_merged_tsv,
         SVAFOTATE.out.svafotate_vcf,
@@ -159,7 +164,7 @@ workflow TARGETED_ANALYSIS {
         exomedepth_deletion_db,
         exomedepth_duplication_db,
         add_svaf_script,
-        ch_vep_tsv_filtered_for_joining,
+        ch_for_exomedepth_postprocess,
         process_script_single,
         panel,
         clingen,
@@ -191,6 +196,7 @@ workflow TARGETED_ANALYSIS {
         SVAFOTATE.out.svafotate_vcf
         EXOMEDEPTH_POSTPROCESS.out.exomedepth_merged_filtered_tsv
         EXOMEDEPTH_POSTPROCESS.out.exomedepth_postprocess_tsv
+        EXOMEDEPTH_POSTPROCESS.out.exomedepth_postprocess_family_tsv
 
         versions = ch_versions
 }
