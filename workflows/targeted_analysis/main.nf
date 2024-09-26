@@ -65,5 +65,6 @@ workflow TARGETED_ANALYSIS {
         GATK_BEST_PRACTICES.out.bqsr_bam
         GATK_BEST_PRACTICES.out.gvcf_file
         GATK_BEST_PRACTICES.out.gvcf_index
+        GATK_BEST_PRACTICES.out.raw_vcf
         versions = ch_versions
 }
