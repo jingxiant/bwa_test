@@ -12,6 +12,7 @@ include { BWA_ALIGN_READS } from "../../subworkflows/align_bwa"
 include { GATK_BEST_PRACTICES } from "../../subworkflows/gatk_best_practices"
 include { VCF_FILTER_AND_DECOMPOSE } from "../../subworkflows/vcf_filter_and_decompose"
 include { VEP_ANNOTATE } from "../../subworkflows/vep_annotation"
+include { AUTOSOLVE_MULTISAMPLE } from "../../subworkflows/autosolve/autosolve_multisample"
 
 /*
 ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
@@ -37,6 +38,11 @@ workflow TARGETED_ANALYSIS {
     vep_plugins
     vcf_to_tsv_script
     mane_transcript
+    autosolve_script
+    panel_monoallelic
+    panel_biallelic
+    clingen
+    mutation_spectrum
     ch_versions
 
     main:
@@ -82,6 +88,16 @@ workflow TARGETED_ANALYSIS {
     )
     ch_versions = ch_versions.mix(VEP_ANNOTATE.out.versions)
 
+    ch_vep_tsv_filtered = VEP_ANNOTATE.out.vep_tsv_filtered
+    AUTOSOLVE_MULTISAMPLE(
+        ch_vep_tsv_filtered,
+        autosolve_script,
+        clingen,
+        panel_monoallelic,
+        panel_biallelic,
+        mutation_spectrum
+    )
+
     emit:
         //BWA_ALIGN_READS.out.aligned_bam
         //GATK_BEST_PRACTICES.out.marked_dup_bam
@@ -96,5 +112,6 @@ workflow TARGETED_ANALYSIS {
         VEP_ANNOTATE.out.vep_tsv
         VEP_ANNOTATE.out.vep_tsv_filtered
         VEP_ANNOTATE.out.vep_tsv_filtered_highqual
+        AUTOSOLVE_MULTISAMPLE.out.autosolve_tsv
         versions = ch_versions
 }
