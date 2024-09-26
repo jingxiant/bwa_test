@@ -25,7 +25,8 @@ workflow EXOMEDEPTH_CNV_CALLING {
   ch_versions = ch_versions.mix(EXOMEDEPTH_KNOWN_TEST_SPLITCHR.out.versions)
   
   EXOMEDEPTH_MERGE_TSV(EXOMEDEPTH_KNOWN_TEST_SPLITCHR.out[1].collect())
-  EXOMEDEPTH_MERGE_TSV.out.view()
+  
+  EXOMEDEPTH_MERGE_TSV.out.flatten().view()
   SVAFOTATE_FOR_EXOMEDEPTH(EXOMEDEPTH_MERGE_TSV.out.flatten(), convert_tsv_to_vcf_script_for_exomedepth, svafotate_bed)
 
   emit:
