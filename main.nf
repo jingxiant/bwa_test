@@ -34,6 +34,8 @@ exomedepth_control = file(params.exomedepth_control)
 exomedepth_target_bed = file(params.exomedepth_target_bed)
 exomedepth_gene_bed = file(params.exomedepth_gene_bed)
 chr = params.chr?.tokenize(',')
+svafotate_bed = file(params.svafotate_bed)
+convert_tsv_to_vcf_script = file(params.convert_tsv_to_vcf_script)
 
 /*
 ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
@@ -92,6 +94,8 @@ workflow PRISM_TARGETED_ANALYSIS {
         exomedepth_target_bed,
         exomedepth_gene_bed,
         chr,
+        svafotate_bed,
+        convert_tsv_to_vcf_script,
         ch_versions
     )
     ch_versions = ch_versions.mix(TARGETED_ANALYSIS.out.versions)
