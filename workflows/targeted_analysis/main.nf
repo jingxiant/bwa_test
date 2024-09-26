@@ -52,6 +52,8 @@ workflow TARGETED_ANALYSIS {
     exomedepth_gene_bed
     chr_list
     ch_versions
+    convert_tsv_to_vcf_script_for_exomedepth
+    svafotate_bed
 
     main:
 
@@ -125,6 +127,8 @@ workflow TARGETED_ANALYSIS {
         exomedepth_target_bed,
         exomedepth_gene_bed,
         chr_list
+        convert_tsv_to_vcf_script_for_exomedepth
+        svafotate_bed
     )
     ch_versions = ch_versions.mix(EXOMEDEPTH_CNV_CALLING.out.versions)
 
@@ -149,5 +153,6 @@ workflow TARGETED_ANALYSIS {
         EXOMEDEPTH_CNV_CALLING.out.exomedepth_png
         EXOMEDEPTH_CNV_CALLING.out.exomedepth_rds
         EXOMEDEPTH_CNV_CALLING.out.exomedepth_merged_tsv
+        EXOMEDEPTH_CNV_CALLING.out.svafotate_vcf
         versions = ch_versions
 }
