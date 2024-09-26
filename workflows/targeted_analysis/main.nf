@@ -48,6 +48,10 @@ workflow TARGETED_ANALYSIS {
     mutation_spectrum
     refgene_track
     ch_versions
+    exomedepth_controls
+    exomedepth_target_bed
+    exomedepth_gene_bed
+    chr_list
 
     main:
 
@@ -114,7 +118,13 @@ workflow TARGETED_ANALYSIS {
 
     ch_bqsr_bam_collect = GATK_BEST_PRACTICES.out.bqsr_bam.collect()
     EXOMEDEPTH_CNV_CALLING(
-        ch_bqsr_bam_collect
+        ch_bqsr_bam_collect,
+        exomedepth_controls,
+        ref_genome,
+        ref_genome_index,
+        exomedepth_target_bed,
+        exomedepth_gene_bed,
+        chr_list
     )
 
     emit:
@@ -134,5 +144,8 @@ workflow TARGETED_ANALYSIS {
         AUTOSOLVE_MULTISAMPLE.out.autosolve_tsv
         BAM_QC.out.qualimap_stats
         BAM_QC.out.depth_of_coverage_stats
+        EXOMEDEPTH_CNV_CALLING.out.exomedepth_tsv
+        EXOMEDEPTH_CNV_CALLING.out.exomedepth_png
+        EXOMEDEPTH_CNV_CALLING.out.exomedepth_rds
         versions = ch_versions
 }
