@@ -1,7 +1,7 @@
 include { GET_SAMPLES_FOR_EXOMEDEPTH } from "../../modules/get_sample_exomedepth"
 include { EXOMEDEPTH_KNOWN_TEST_SPLITCHR } from "../../modules/exomedepth/known_test_splitchr"
 include { EXOMEDEPTH_MERGE_TSV } from "../../modules/exomedepth/merge_tsv"
-include { SVAFOTATE_FOR_EXOMEDEPTH } from "../../modules/exomedepth/exomedepth/svafotate"
+include { SVAFOTATE_FOR_EXOMEDEPTH } from "../../modules/exomedepth/svafotate"
 
 workflow EXOMEDEPTH_CNV_CALLING {
 
