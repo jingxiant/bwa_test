@@ -2,6 +2,7 @@ include { MARK_DUPLICATES } from "../../modules/mark_duplicates"
 include { BASE_RECALIBRATOR } from "../../modules/bqsr_wes"
 include { APPLY_BQSR } from "../../modules/apply_bqsr_wes"
 include { HAPLOTYPECALLER } from "../../modules/haplotypecaller_wes"
+include { GENOTYPEGVCFS } from "../../modules/genotypegvcf_wes"
 
 workflow GATK_BEST_PRACTICES {
 
