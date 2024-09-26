@@ -24,7 +24,11 @@ vep_cache = file(params.vep_cache_dir)
 vep_plugins = file(params.vep_plugin_dir)
 vcf_to_tsv_script=file(params.vcf_to_tsv)
 mane_transcript=file(params.mane_transcript)
-
+clingen = file(params.clingen)
+mutation_spectrum = file(params.mutation_spectrum)
+autosolve_script = file(params.autosolve_script)
+panel_monoallelic = file(params.panel_monoallelic)
+panel_biallelic = file(params.panel_biallelic)
 
 /*
 ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
@@ -72,6 +76,11 @@ workflow PRISM_TARGETED_ANALYSIS {
         vep_plugins,
         vcf_to_tsv_script,
         mane_transcript,
+        autosolve_script,
+        panel_monoallelic,
+        panel_biallelic,
+        clingen,
+        mutation_spectrum,
         ch_versions
     )
     ch_versions = ch_versions.mix(TARGETED_ANALYSIS.out.versions)
