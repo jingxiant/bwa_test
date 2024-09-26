@@ -22,6 +22,9 @@ target_bed = file(params.target_bed)
 target_bed_covered = file(params.target_bed_covered)
 vep_cache = file(params.vep_cache_dir)
 vep_plugins = file(params.vep_plugin_dir)
+vcf_to_tsv_script=file(params.vcf_to_tsv)
+mane_transcript=file(params.mane_transcript)
+
 
 /*
 ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
@@ -67,6 +70,8 @@ workflow PRISM_TARGETED_ANALYSIS {
         target_bed,
         vep_cache,
         vep_plugins,
+        vcf_to_tsv_script,
+        mane_transcript,
         ch_versions
     )
     ch_versions = ch_versions.mix(TARGETED_ANALYSIS.out.versions)
