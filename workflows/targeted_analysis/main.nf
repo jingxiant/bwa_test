@@ -45,6 +45,7 @@ workflow TARGETED_ANALYSIS {
     panel_biallelic
     clingen
     mutation_spectrum
+    refgene_track
     ch_versions
 
     main:
@@ -103,7 +104,10 @@ workflow TARGETED_ANALYSIS {
     ch_vep_tsv_filtered = GATK_BEST_PRACTICES.out.bqsr_bam
     BAM_QC(
         ch_vep_tsv_filtered,
-        target_bed_covered
+        target_bed_covered,
+        ref_genome,
+        ref_genome_index,
+        refgene_track
     )
     ch_versions = ch_versions.mix(BAM_QC.out.versions)
 
@@ -123,5 +127,6 @@ workflow TARGETED_ANALYSIS {
         VEP_ANNOTATE.out.vep_tsv_filtered_highqual
         AUTOSOLVE_MULTISAMPLE.out.autosolve_tsv
         BAM_QC.out.qualimap_stats
+        BAM_QC.out.depth_of_coverage_stats
         versions = ch_versions
 }
