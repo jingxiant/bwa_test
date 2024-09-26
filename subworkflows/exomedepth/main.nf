@@ -18,13 +18,14 @@ workflow EXOMEDEPTH_CNV_CALLING {
 
   GET_SAMPLES_FOR_EXOMEDEPTH(ch_apply_bqsr_bam)
   EXOMEDEPTH_KNOWN_TEST_SPLITCHR(controls, ch_apply_bqsr_bam, ref_genome, ref_genome_index, exomedepth_target_bed, exomedepth_gene_bed, chr, GET_SAMPLES_FOR_EXOMEDEPTH.out)
+  EXOMEDEPTH_KNOWN_TEST_SPLITCHR.out[1].view()
   EXOMEDEPTH_MERGE_TSV(EXOMEDEPTH_KNOWN_TEST_SPLITCHR.out[1].collect())
 
   ch_versions = ch_versions.mix(EXOMEDEPTH_KNOWN_TEST_SPLITCHR.out.versions)
 
   emit:
   sample_list_for_exomedepth   = GET_SAMPLES_FOR_EXOMEDEPTH.out[0]
-  exomedepth_tsv               = EXOMEDEPTH_KNOWN_TEST_SPLITCHR.out[1].collect()
+  exomedepth_tsv               = EXOMEDEPTH_KNOWN_TEST_SPLITCHR.out[1]
   exomedepth_png               = EXOMEDEPTH_KNOWN_TEST_SPLITCHR.out[2]
   exomedepth_rds               = EXOMEDEPTH_KNOWN_TEST_SPLITCHR.out[3]
   exomedepth_merged_tsv        = EXOMEDEPTH_MERGE_TSV.out
