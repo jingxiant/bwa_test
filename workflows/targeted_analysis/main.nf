@@ -158,12 +158,12 @@ workflow TARGETED_ANALYSIS {
         exomedepth_annotate_counts_script,
         exomedepth_deletion_db,
         exomedepth_duplication_db,
-        add_svaf_script
-        ch_vep_tsv_filtered_for_joining
-        process_script_single
-        panel
-        clingen
-        mutation_spectrum
+        add_svaf_script,
+        ch_vep_tsv_filtered_for_joining,
+        process_script_single,
+        panel,
+        clingen,
+        mutation_spectrum,
         decipher
     )
     
