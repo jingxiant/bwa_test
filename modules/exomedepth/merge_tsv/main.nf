@@ -41,3 +41,5 @@ process EXOMEDEPTH_MERGE_TSV {
             if header_flag == 0:
                 cmd1 = "head -n1 " + i + " > header.tsv"
                 os.system(cmd1)
+    """
+}
