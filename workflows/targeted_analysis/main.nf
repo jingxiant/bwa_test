@@ -17,6 +17,7 @@ include { BAM_QC } from "../../subworkflows/bam_qc"
 include { EXOMEDEPTH_CNV_CALLING } from "../../subworkflows/exomedepth"
 include { EXOMEDEPTH_CNV_CALLING } from "../../subworkflows/exomedepth"
 include { SVAFOTATE } from "../../subworkflows/svafotate"
+include { EXOMEDEPTH_POSTPROCESS } from "../../subworkflows/exomedepth_postprocess"
 
 /*
 ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
@@ -55,6 +56,11 @@ workflow TARGETED_ANALYSIS {
     chr_list
     convert_tsv_to_vcf_script_for_exomedepth
     svafotate_bed
+    exomedepth_annotate_counts_script
+    exomedepth_deletion_db
+    exomedepth_duplication_db
+    add_svaf_script
+
     ch_versions
 
 
@@ -133,6 +139,7 @@ workflow TARGETED_ANALYSIS {
         //convert_tsv_to_vcf_script_for_exomedepth,
         //svafotate_bed
     )
+    ch_versions = ch_versions.mix(EXOMEDEPTH_CNV_CALLING.out.versions)
 
     ch_merged_tsv = EXOMEDEPTH_CNV_CALLING.out.exomedepth_merged_tsv
     SVAFOTATE(
@@ -141,8 +148,15 @@ workflow TARGETED_ANALYSIS {
         svafotate_bed
     )
 
-    ch_versions = ch_versions.mix(EXOMEDEPTH_CNV_CALLING.out.versions)
-
+    EXOMEDEPTH_POSTPROCESS(
+        ch_merged_tsv,
+        SVAFOTATE.out.svafotate_vcf,
+        exomedepth_annotate_counts_script,
+        exomedepth_deletion_db,
+        exomedepth_duplication_db,
+        add_svaf_script
+    )
+    
     emit:
         //BWA_ALIGN_READS.out.aligned_bam
         //GATK_BEST_PRACTICES.out.marked_dup_bam
@@ -165,5 +179,6 @@ workflow TARGETED_ANALYSIS {
         EXOMEDEPTH_CNV_CALLING.out.exomedepth_rds
         EXOMEDEPTH_CNV_CALLING.out.exomedepth_merged_tsv
         SVAFOTATE.out.svafotate_vcf
+        EXOMEDEPTH_POSTPROCESS.out.exomedepth_merged_filtered_tsv
         versions = ch_versions
 }
