@@ -1,4 +1,4 @@
-include { AUTOSOLVE_TIER1_TIER2_MULTISAMPLE } from "../../modules/autosolve_multisample"
+include { AUTOSOLVE_TIER1_TIER2_MULTISAMPLE } from "../../../modules/autosolve_multisample/main.nf"
 
 workflow AUTOSOLVE_MULTISAMPLE {
 
