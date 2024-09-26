@@ -1,4 +1,4 @@
-finclude { EXOMEDEPTH_FILTER_MERGE_TSV } from "../../modules/exomedepth/filter_merged_tsv"
+include { EXOMEDEPTH_FILTER_MERGE_TSV } from "../../modules/exomedepth/filter_merged_tsv"
 
 workflow EXOMEDEPTH_POSTPROCESS {
 
