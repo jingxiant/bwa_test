@@ -10,7 +10,7 @@ workflow EXOMEDEPTH_POSTPROCESS {
   exomedepth_deletion_db
   exomedepth_duplication_db
   add_svaf_script
-  ch_exomedepthtsv_veptsv
+  ch_vcf_filtered_tsv
   process_script_single
   panel
   clingen
@@ -20,11 +20,11 @@ workflow EXOMEDEPTH_POSTPROCESS {
   main:
   EXOMEDEPTH_FILTER_MERGE_TSV(exomedepth_merged_tsv, svafotate_vcf, exomedepth_annotate_counts_script, exomedepth_deletion_db, exomedepth_duplication_db, add_svaf_script)
 
-  /*EXOMEDEPTH_FILTER_MERGE_TSV.out.flatten()
+  EXOMEDEPTH_FILTER_MERGE_TSV.out.flatten()
         .map {file -> [file.simpleName, file]}
-        .set { exomedepth_ch }*/
+        .set { exomedepth_ch }
 
-  EXOMEDEPTH_POSTPROCESS_SINGLE(ch_exomedepthtsv_veptsv, process_script_single, panel, clingen, mutation_spectrum, decipher)
+  EXOMEDEPTH_POSTPROCESS_SINGLE(exomedepth_ch.join(ch_vcf_filtered_tsv), process_script_single, panel, clingen, mutation_spectrum, decipher)
 
   emit:
   exomedepth_merged_filtered_tsv  = EXOMEDEPTH_FILTER_MERGE_TSV.out
