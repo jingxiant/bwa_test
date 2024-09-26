@@ -13,7 +13,7 @@ process SVAFOTATE_FOR_EXOMEDEPTH {
 
         script:
         """
-        python3 ${convert_tsv_to_vcf_script} ${exomedepth_filtered_tsv} ${exomedepth_filtered_tsv.baseName}.vcf
+        python ${convert_tsv_to_vcf_script} ${exomedepth_filtered_tsv} ${exomedepth_filtered_tsv.baseName}.vcf
         bcftools sort ${exomedepth_filtered_tsv.baseName}.vcf -o ${exomedepth_filtered_tsv.baseName}.sorted.vcf
         svafotate annotate -v ${exomedepth_filtered_tsv.baseName}.sorted.vcf -o ${exomedepth_filtered_tsv.baseName}.svafotated.vcf -b ${svafotate_bed}
         """
