@@ -4,7 +4,8 @@ process EXOMEDEPTH_MERGE_TSV {
     publishDir ( params.case == 'known' ? "$params.publishdir/exomedepth/known_case/mergedchr_tsv" : "$params.publishdir/exomedepth/all_sample/mergedchr_tsv" ), mode: 'copy'
     
     input:
-      path(tsv)
+    file(tsv)
+    //path(tsv)
     output:
       path("*.exomedepth.merged.tsv")
         
