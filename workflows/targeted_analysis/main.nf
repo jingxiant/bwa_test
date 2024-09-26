@@ -15,6 +15,8 @@ include { VEP_ANNOTATE } from "../../subworkflows/vep_annotation"
 include { AUTOSOLVE_MULTISAMPLE } from "../../subworkflows/autosolve/autosolve_multisample"
 include { BAM_QC } from "../../subworkflows/bam_qc"
 include { EXOMEDEPTH_CNV_CALLING } from "../../subworkflows/exomedepth"
+include { EXOMEDEPTH_CNV_CALLING } from "../../subworkflows/exomedepth"
+include { SVAFOTATE } from "../../subworkflows/svafoatte"
 
 /*
 ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
@@ -127,9 +129,16 @@ workflow TARGETED_ANALYSIS {
         exomedepth_target_bed,
         exomedepth_gene_bed,
         chr_list,
+        //convert_tsv_to_vcf_script_for_exomedepth,
+        //svafotate_bed
+    )
+
+    SVAFOTATE(
+        EXOMEDEPTH_CNV_CALLING.out.exomedepth_merged_tsv.flatten(),
         convert_tsv_to_vcf_script_for_exomedepth,
         svafotate_bed
     )
+
     ch_versions = ch_versions.mix(EXOMEDEPTH_CNV_CALLING.out.versions)
 
     emit:
