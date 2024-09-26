@@ -41,5 +41,15 @@ process EXOMEDEPTH_MERGE_TSV {
             if header_flag == 0:
                 cmd1 = "head -n1 " + i + " > header.tsv"
                 os.system(cmd1)
+                header_flag = 1
+            
+            cmd2 = "cat " + i + '''| awk 'FNR!=1{print}' >>''' + sampleid + ".${params.timestamp}.exomedepth.merged.noheader.tsv"
+            
+            os.system(cmd2)
+            print(cmd2)
+        cmd3 = "cat header.tsv " + sampleid + ".${params.timestamp}.exomedepth.merged.noheader.tsv > " + sampleid + ".${params.timestamp}.exomedepth.merged.tsv"
+        print(cmd3)
+        os.system(cmd3)
+        
     """
 }
