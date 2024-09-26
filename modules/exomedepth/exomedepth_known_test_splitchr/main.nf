@@ -142,8 +142,7 @@ process EXOMEDEPTH_KNOWN_TEST_SPLITCHR {
             #datalist = list(all.samples, bam.counts, found.cnvs.annotate@CNV.calls, results.annotate)
             #saveRDS(datalist, paste(file.path(".",test.sample,paste(test.sample,".RData",sep='')),sep='/'))
             
-            saveRDS(found.cnvs.annotate, paste(file.path(".",test.sample,paste(test.sample, "${params.timestamp}", "found.cnvs.annotate.${chr}.rds",sep='.')),sep='/'), compress=T
-RUE)
+            saveRDS(found.cnvs.annotate, paste(file.path(".",test.sample,paste(test.sample, "${params.timestamp}", "found.cnvs.annotate.${chr}.rds",sep='.')),sep='/'), compress=TRUE)
             saveRDS(results.annotate, paste(file.path(".",test.sample,paste(test.sample, "${params.timestamp}", "results.annotate.${chr}.rds",sep='.')),sep='/'), compress=TRUE)
 
             dir.create(file.path(test.sample, 'plot', '${chr}'), recursive = TRUE, showWarnings = FALSE)
