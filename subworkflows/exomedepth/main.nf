@@ -10,6 +10,6 @@ workflow EXOMEDEPTH_CNV_CALLING {
   GET_SAMPLES_FOR_EXOMEDEPTH(ch_apply_bqsr)
 
   emit:
-  sample_list_for_exomedepth   = ALIGN_READS.out[0]
+  sample_list_for_exomedepth   = GET_SAMPLES_FOR_EXOMEDEPTH.out[0]
   versions                     = ch_versions
 }
