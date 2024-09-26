@@ -1,5 +1,5 @@
 include { RUN_QUALIMAP_WES } from "../../modules/qualimap_wes"
-include { DEPTH_OF_COVERAGE_WES } from "../../modules/bam_qc"
+include { DEPTH_OF_COVERAGE_WES } from "../../modules/depth_of_coverage"
 
 workflow BAM_QC {
 
