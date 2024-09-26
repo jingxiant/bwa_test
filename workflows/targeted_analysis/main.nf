@@ -13,6 +13,7 @@ include { GATK_BEST_PRACTICES } from "../../subworkflows/gatk_best_practices"
 include { VCF_FILTER_AND_DECOMPOSE } from "../../subworkflows/vcf_filter_and_decompose"
 include { VEP_ANNOTATE } from "../../subworkflows/vep_annotation"
 include { AUTOSOLVE_MULTISAMPLE } from "../../subworkflows/autosolve/autosolve_multisample"
+include { BAM_QC } from "../../subworkflows/bam_qc"
 
 /*
 ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
@@ -34,6 +35,7 @@ workflow TARGETED_ANALYSIS {
     known_snps_dbsnp_index
     known_indels_index
     target_bed
+    target_bed_covered
     vep_cache
     vep_plugins
     vcf_to_tsv_script
@@ -98,6 +100,13 @@ workflow TARGETED_ANALYSIS {
         mutation_spectrum
     )
 
+    ch_vep_tsv_filtered = GATK_BEST_PRACTICES.out.bqsr_bam
+    BAM_QC(
+        ch_vep_tsv_filtered,
+        target_bed_covered
+    )
+    ch_versions = ch_versions.mix(BAM_QC.out.versions)
+
     emit:
         //BWA_ALIGN_READS.out.aligned_bam
         //GATK_BEST_PRACTICES.out.marked_dup_bam
@@ -113,5 +122,6 @@ workflow TARGETED_ANALYSIS {
         VEP_ANNOTATE.out.vep_tsv_filtered
         VEP_ANNOTATE.out.vep_tsv_filtered_highqual
         AUTOSOLVE_MULTISAMPLE.out.autosolve_tsv
+        BAM_QC.out.qualimap_stats
         versions = ch_versions
 }
