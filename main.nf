@@ -104,6 +104,9 @@ workflow PRISM_TARGETED_ANALYSIS {
         exomedepth_deletion_db,
         exomedepth_duplication_db,
         add_svaf_script,
+        process_script_single,
+        panel,
+        decipher,
         ch_versions
     )
     ch_versions = ch_versions.mix(TARGETED_ANALYSIS.out.versions)
