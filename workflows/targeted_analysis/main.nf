@@ -11,7 +11,7 @@
 include { BWA_ALIGN_READS } from "../../subworkflows/align_bwa"
 include { GATK_BEST_PRACTICES } from "../../subworkflows/gatk_best_practices"
 include { VCF_FILTER_AND_DECOMPOSE } from "../../subworkflows/vcf_filter_and_decompose"
-include { VEP_ANNOTATE } from "../../subworkflows/vcf_annotation"
+include { VEP_ANNOTATE } from "../../subworkflows/vep_annotation"
 
 /*
 ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
