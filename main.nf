@@ -26,6 +26,7 @@ vcf_to_tsv_script=file(params.vcf_to_tsv)
 mane_transcript=file(params.mane_transcript)
 clingen = file(params.clingen)
 mutation_spectrum = file(params.mutation_spectrum)
+decipher = file(params.decipher)
 autosolve_script = file(params.autosolve_script)
 panel_monoallelic = file(params.panel_monoallelic)
 panel_biallelic = file(params.panel_biallelic)
@@ -40,6 +41,8 @@ convert_tsv_to_vcf_script = file(params.convert_tsv_to_vcf_script)
 exomedepth_annotate_counts_script = file(params.exomedepth_annotate_counts_script)
 exomedepth_deletion_db = file(params.exomedepth_deletion_db)
 exomedepth_duplication_db = file(params.exomedepth_duplication_db)
+process_script_single = file(params.process_script_single)
+panel = file(params.panel)
 
 /*
 ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
