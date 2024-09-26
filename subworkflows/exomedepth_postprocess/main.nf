@@ -1,5 +1,6 @@
 include { EXOMEDEPTH_FILTER_MERGE_TSV } from "../../modules/exomedepth/filter_merged_tsv"
 include { EXOMEDEPTH_POSTPROCESS_SINGLE } from "../../modules/exomedepth/postprocess_single"
+include { EXOMEDEPTH_POSTPROCESS_FAMILY } from "../../modules/exomedepth/postprocess_cohort"
 
 workflow EXOMEDEPTH_POSTPROCESS {
 
@@ -32,7 +33,8 @@ workflow EXOMEDEPTH_POSTPROCESS {
   }
 
   emit:
-  exomedepth_merged_filtered_tsv  = EXOMEDEPTH_FILTER_MERGE_TSV.out
-  exomedepth_postprocess_tsv      = EXOMEDEPTH_POSTPROCESS_SINGLE.out
+  exomedepth_merged_filtered_tsv    = EXOMEDEPTH_FILTER_MERGE_TSV.out
+  exomedepth_postprocess_tsv        = EXOMEDEPTH_POSTPROCESS_SINGLE.out
+  exomedepth_postprocess_family_tsv = EXOMEDEPTH_POSTPROCESS_COHORT.out
   
 }
