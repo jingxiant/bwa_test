@@ -88,7 +88,7 @@ workflow PRISM_TARGETED_ANALYSIS {
         clingen,
         mutation_spectrum,
         refseq_gene_track,
-        exomedepth_controls,
+        exomedepth_control,
         exomedepth_target_bed,
         exomedepth_gene_bed,
         chr_list,
