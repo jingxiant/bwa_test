@@ -1,5 +1,5 @@
-include {GET_TOOLS_VERSION} from "../../modules/file_check"
-include {LOG_PARAMS} from "../../modules/log_params"
+include { GET_TOOLS_VERSION } from "../../modules/file_check/get_tools_version"
+include { LOG_PARAMS } from "../../modules/log_params"
 
 workflow CHECK_FILE_VALIDITY {
 
