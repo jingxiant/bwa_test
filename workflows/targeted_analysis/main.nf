@@ -19,6 +19,7 @@ include { EXOMEDEPTH_CNV_CALLING } from "../../subworkflows/exomedepth"
 include { SVAFOTATE } from "../../subworkflows/svafotate"
 include { EXOMEDEPTH_POSTPROCESS } from "../../subworkflows/exomedepth_postprocess"
 include { GSEAPY } from "../../subworkflows/gseapy"
+include { SMACA } from "../../subworkflows/smaca"
 
 /*
 ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
@@ -182,7 +183,15 @@ workflow TARGETED_ANALYSIS {
         gene_sets,
         gseapy_enrich_script)
     ch_versions = ch_versions.mix(GSEAPY.out.versions)
-    
+
+    ch_bqsr_bam = GATK_BEST_PRACTICES.out.bqsr_bam
+    SMACA(
+        ch_bqsr_bam,
+        ref_genome,
+        ref_genome_index
+    )
+    ch_versions = ch_versions.mix(SMACA.out.versions)
+
     emit:
         //BWA_ALIGN_READS.out.aligned_bam
         //GATK_BEST_PRACTICES.out.marked_dup_bam
@@ -210,6 +219,7 @@ workflow TARGETED_ANALYSIS {
         EXOMEDEPTH_POSTPROCESS.out.exomedepth_del_tsv_forgseapy
         EXOMEDEPTH_POSTPROCESS.out.exomedepth_dup_tsv_forgseapy
         GSEAPY.out.gseapy_output_tsv
+        SMACA.out.smaca_tsv
 
         versions = ch_versions
 }
