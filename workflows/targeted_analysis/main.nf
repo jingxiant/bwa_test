@@ -21,6 +21,7 @@ include { EXOMEDEPTH_POSTPROCESS } from "../../subworkflows/exomedepth_postproce
 include { GSEAPY } from "../../subworkflows/gseapy"
 include { SMACA } from "../../subworkflows/smaca"
 include { MITOCALLER_ANALYSIS } from "../../subworkflows/mitocaller"
+include { CHECK_FILE_VALIDIFTY } from "../../subworkflows/file_check"
 
 /*
 ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
@@ -73,6 +74,7 @@ workflow TARGETED_ANALYSIS {
     mitomap
     mitotip
     mitimpact
+    modify_versions_log_script
 
     ch_versions
 
@@ -214,6 +216,8 @@ workflow TARGETED_ANALYSIS {
     tool_versions_ch = ch_versions.collectFile(name: 'versions.log', newLine: true, sort: false)
     tool_versions_ch.view()
 
+    CHECK_FILE_VALIDIFTY(tool_versions_ch, modify_versions_log_script)
+
     emit:
         GATK_BEST_PRACTICES.out.bqsr_recal_table
         GATK_BEST_PRACTICES.out.bqsr_bam
@@ -244,6 +248,7 @@ workflow TARGETED_ANALYSIS {
         MITOCALLER_ANALYSIS.out.mitocaller_output_summary
         MITOCALLER_ANALYSIS.out.mitocaller_candidate_variants
         MITOCALLER_ANALYSIS.out.mitocaller_filtered_output
+        CHECK_FILE_VALIDIFTY.out.version_txt
 
         versions = ch_versions
 }
