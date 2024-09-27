@@ -15,23 +15,6 @@ process RUN_EXOMEDEPTH_GSEAPY {
 
         script:
         """
-        process RUN_EXOMEDEPTH_GSEAPY_DEL {
-
-        publishDir "$params.publishdir/exomedepth/gseapy_enrich", mode: 'copy'
-        container 'jxprismdocker/prism_gseapy'
-        errorStrategy 'ignore'
-
-        input:
-        tuple val(samplename), file(output)
-        file(gene_sets)
-        file(gseapy_enrich_script)
-
-        output:
-        tuple val(samplename), file('*.tsv')
-        path "versions.yml", emit: versions, optional: true
-
-        script:
-        """
         python ${gseapy_enrich_script} ${samplename}.${params.timestamp}.merged.del.counts.genes.tsv ${gene_sets} ${samplename}.${params.timestamp}.merged.del.counts.genes.gseapy.tsv
         python ${gseapy_enrich_script} ${samplename}.${params.timestamp}.merged.dup.counts.genes.tsv ${gene_sets} ${samplename}.${params.timestamp}.merged.dup.counts.genes.gseapy.tsv
         cat ${samplename}.${params.timestamp}.merged.del.counts.genes.gseapy.tsv | awk -F'\t' '{temp = \$5 + 0; if(temp < 0.05) print \$0}' > ${samplename}.${params.timestamp}.merged.del.counts.genes.gseapy.filtered.tsv
