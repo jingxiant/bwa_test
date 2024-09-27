@@ -22,6 +22,7 @@ include { GSEAPY } from "../../subworkflows/gseapy"
 include { SMACA } from "../../subworkflows/smaca"
 include { MITOCALLER_ANALYSIS } from "../../subworkflows/mitocaller"
 include { CHECK_FILE_VALIDITY } from "../../subworkflows/file_check"
+include { GENERATE_REPORT } from "../../subworkflows/generate_report"
 
 /*
 ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
@@ -79,6 +80,7 @@ workflow TARGETED_ANALYSIS {
     check_file_status_script
     tabulate_samples_quality_script
     check_sample_stats_script
+    rmd_template
 
     ch_versions
 
@@ -236,6 +238,21 @@ workflow TARGETED_ANALYSIS {
             check_file_status_script, 
             tabulate_samples_quality_script, 
             check_sample_stats_script)
+
+    ch_for_rmarkdown_single_sample = CHECK_FILE_VALIDITY.out.check_file_validity_wes_singlesample_output.join(BAM_QC.out.depth_of_coverage_stats).combine(CHECK_FILE_VALIDITY.out.version_txt)
+    if(params.genotyping_mode == 'single'){
+       ch_for_rmarkdown_single_sample_processed = ch_for_rmarkdown_single_sample.map { tuple ->
+                                                  def sampleName = tuple[0]
+                                                  def allFiles = tuple[1..-1].collectMany { it instanceof List ? it : [it] }
+                                                  [sampleName, allFiles]
+                                                  }         
+    }
+    GENERATE_REPORT(
+        channel_for_rmarkdown_processed,
+        rmd_template,
+        CHECK_FILE_VALIDITY.out.params_log,
+        panel
+    )
     
     emit:
         GATK_BEST_PRACTICES.out.bqsr_recal_table
