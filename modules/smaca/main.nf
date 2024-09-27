@@ -19,6 +19,5 @@ process SMACA_BAM {
 
         cat <<-END_VERSIONS > versions.yml
                 ${task.process}\tsmaca:\$(pip show smaca 2>&1 | grep "Version" | sed 's/Version: //g')
-        #END_VERSIONS
         """
 }
