@@ -75,6 +75,7 @@ workflow TARGETED_ANALYSIS {
     mitotip
     mitimpact
     modify_versions_log_script
+    parameters_file
 
     ch_versions
 
@@ -216,7 +217,7 @@ workflow TARGETED_ANALYSIS {
     tool_versions_ch = ch_versions.collectFile(name: 'versions.log', newLine: true, sort: false)
     tool_versions_ch.view()
 
-    CHECK_FILE_VALIDITY(tool_versions_ch, modify_versions_log_script)
+    CHECK_FILE_VALIDITY(tool_versions_ch, modify_versions_log_script, parameters_file)
 
     emit:
         GATK_BEST_PRACTICES.out.bqsr_recal_table
@@ -249,6 +250,7 @@ workflow TARGETED_ANALYSIS {
         MITOCALLER_ANALYSIS.out.mitocaller_candidate_variants
         MITOCALLER_ANALYSIS.out.mitocaller_filtered_output
         CHECK_FILE_VALIDITY.out.version_txt
+        CHECK_FILE_VALIDITY.out.params_log
 
         versions = ch_versions
 }
