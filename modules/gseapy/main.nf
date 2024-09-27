@@ -5,7 +5,7 @@ process RUN_EXOMEDEPTH_GSEAPY {
         errorStrategy 'ignore'
 
         input:
-        tuple val(samplename), file(output)
+        tuple val(samplename), file(del_output), file(dup_output)
         file(gene_sets)
         file(gseapy_enrich_script)
 
