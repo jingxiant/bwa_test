@@ -222,7 +222,7 @@ workflow TARGETED_ANALYSIS {
 
     //CHECK_FILE_VALIDITY(tool_versions_ch, modify_versions_log_script, parameters_file, BAM_QC.out.depth_of_coverage_stats, VEP_ANNOTATE.out.vep_tsv_filtered, VCF_FILTER_AND_DECOMPOSE.out.decom_norm_vcf, check_file_status_script, tabulate_samples_quality_script, check_sample_stats_script)
     if(params.genotyping_mode == 'single'){
-        ch_for_filecheck = BAM_QC.out.depth_of_coverage_stats.join(VEP_ANNOTATE.out.vep_tsv_filtere).join(VCF_FILTER_AND_DECOMPOSE.out.decom_norm_vcf).join(BAM_QC.out.edited_qualimap_output)
+        ch_for_filecheck = BAM_QC.out.depth_of_coverage_stats.join(VEP_ANNOTATE.out.vep_tsv_filtered).join(VCF_FILTER_AND_DECOMPOSE.out.decom_norm_vcf).join(BAM_QC.out.edited_qualimap_output)
         ch_for_filecheck_processed = channel_for_filecheck.map { tuple ->
                                                 def sampleName = tuple[0]
                                                 def allFiles = tuple[1..-1].collectMany { it instanceof List ? it : [it] }
