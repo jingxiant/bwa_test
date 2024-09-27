@@ -1,6 +1,6 @@
 include { RUN_QUALIMAP_WES } from "../../modules/qualimap_wes"
 include { DEPTH_OF_COVERAGE_WES } from "../../modules/depth_of_coverage"
-include { EDIT_QUALIMAP_OUTPUT } from "../../modules/edit_qualimap_output
+include { EDIT_QUALIMAP_OUTPUT } from "../../modules/edit_qualimap_output"
 
 workflow BAM_QC {
 
