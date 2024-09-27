@@ -211,6 +211,9 @@ workflow TARGETED_ANALYSIS {
         mitimpact
     )
 
+    tool_versions_ch = versions.collectFile(name: 'versions.log', newLine: true, sort: false)
+    tool_versions_ch.view()
+
     emit:
         GATK_BEST_PRACTICES.out.bqsr_recal_table
         GATK_BEST_PRACTICES.out.bqsr_bam
