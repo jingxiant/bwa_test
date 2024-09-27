@@ -49,7 +49,7 @@ header = file(params.header)
 mitomap = file(params.mitomap)
 mitotip = file(params.mitotip)
 mitimpact = file(params.mitimpact)
-mitocaller_result_filter = file(params.mitocaller_result_filter)
+mitocaller_result_filter_script = file(params.mitocaller_result_filter)
 
 /*
 ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
@@ -120,6 +120,10 @@ workflow PRISM_TARGETED_ANALYSIS {
         gene_sets,
         gseapy_enrich_script,
         header,
+        mitomap,
+        mitotip,
+        mitimpact,
+        mitocaller_result_filter_script,
         ch_versions
     )
     ch_versions = ch_versions.mix(TARGETED_ANALYSIS.out.versions)
