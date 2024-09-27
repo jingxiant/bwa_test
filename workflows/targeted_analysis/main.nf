@@ -228,9 +228,16 @@ workflow TARGETED_ANALYSIS {
                                                 def sampleName = tuple[0]
                                                 def allFiles = tuple[1..-1].collectMany { it instanceof List ? it : [it] }
                                                 [sampleName, allFiles]
-                                            }
-        CHECK_FILE_VALIDITY(tool_versions_ch, modify_versions_log_script, parameters_file, ch_for_filecheck_processed, check_file_status_script, tabulate_samples_quality_script, check_sample_stats_script)
-    }
+                                     }
+    } 
+
+    CHECK_FILE_VALIDITY(tool_versions_ch, 
+            modify_versions_log_script, 
+            parameters_file, 
+            ch_for_filecheck_processed, 
+            check_file_status_script, 
+            tabulate_samples_quality_script, 
+            check_sample_stats_script)
     
     emit:
         GATK_BEST_PRACTICES.out.bqsr_recal_table
