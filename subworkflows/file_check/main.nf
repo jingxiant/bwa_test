@@ -25,5 +25,5 @@ workflow CHECK_FILE_VALIDITY {
   emit:
   version_txt                                 = GET_TOOLS_VERSION.out[0]
   params_log                                  = LOG_PARAMS.out
-  check_file_validity_wes_multisample_output  = CHECK_FILE_VALIDITY_WES_MULTISAMPLE[0]
+  check_file_validity_wes_multisample_output  = CHECK_FILE_VALIDITY_WES_MULTISAMPLE.out[0]
 }
