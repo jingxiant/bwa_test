@@ -176,13 +176,13 @@ workflow TARGETED_ANALYSIS {
     )
 
     EXOMEDEPTH_POSTPROCESS.out.exomedepth_del_tsv_forgseapy.join(EXOMEDEPTH_POSTPROCESS.out.exomedepth_dup_tsv_forgseapy).view()
-    /*ch_merged_filtered_tsv_for_gseapy = EXOMEDEPTH_POSTPROCESS.out.collect()
+    ch_merged_filtered_tsv_for_gseapy = EXOMEDEPTH_POSTPROCESS.out.exomedepth_del_tsv_forgseapy.join(EXOMEDEPTH_POSTPROCESS.out.exomedepth_dup_tsv_forgseapy)
     GSEAPY(
         ch_merged_filtered_tsv_for_gseapy, 
         gene_sets,
         gseapy_enrich_script)
     ch_versions = ch_versions.mix(GSEAPY.out.versions)
-    */
+    
     emit:
         //BWA_ALIGN_READS.out.aligned_bam
         //GATK_BEST_PRACTICES.out.marked_dup_bam
@@ -209,7 +209,7 @@ workflow TARGETED_ANALYSIS {
         EXOMEDEPTH_POSTPROCESS.out.exomedepth_postprocess_tsv
         EXOMEDEPTH_POSTPROCESS.out.exomedepth_del_tsv_forgseapy
         EXOMEDEPTH_POSTPROCESS.out.exomedepth_dup_tsv_forgseapy
-        //GSEAPY.out.gseapy_output_tsv
+        GSEAPY.out.gseapy_output_tsv
 
         versions = ch_versions
 }
