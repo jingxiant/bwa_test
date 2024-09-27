@@ -10,7 +10,8 @@ process RUN_EXOMEDEPTH_GSEAPY {
         file(gseapy_enrich_script)
 
         output:
-        tuple val(samplename), file('*.tsv')
+        tuple val(samplename), file('*.merged.del.counts.genes.gseapy.filtered.tsv'), optional: true
+        tuple val(samplename), file('*.merged.dup.counts.genes.gseapy.filtered.tsv'), optional: true
         path "versions.yml", emit: versions, optional: true
 
         script:
