@@ -211,7 +211,7 @@ workflow TARGETED_ANALYSIS {
         mitimpact
     )
 
-    tool_versions_ch = versions.collectFile(name: 'versions.log', newLine: true, sort: false)
+    tool_versions_ch = ch_versions.collectFile(name: 'versions.log', newLine: true, sort: false)
     tool_versions_ch.view()
 
     emit:
