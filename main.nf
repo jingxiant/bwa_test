@@ -51,6 +51,7 @@ mitotip = file(params.mitotip)
 mitimpact = file(params.mitimpact)
 mitocaller_result_filter_script = file(params.mitocaller_result_filter)
 software_version_modify_script = file(params.software_version_modify_script)
+params_file = file(params.params_file)
 
 
 /*
@@ -127,6 +128,7 @@ workflow PRISM_TARGETED_ANALYSIS {
         mitotip,
         mitimpact,
         software_version_modify_script,
+        params_file,
         
         ch_versions
     )
