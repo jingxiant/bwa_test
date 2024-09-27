@@ -13,5 +13,5 @@ workflow MITOCALLER {
   MITOCALLER(EXTRACT_MTDNA_BAM.out, ref_genome)
 
   emit:
-  mitocaller_output_summary   = MITOCALLER,out[0]
+  mitocaller_output_summary   = MITOCALLER.out[0]
 }
