@@ -200,12 +200,14 @@ workflow TARGETED_ANALYSIS {
     MITOCALLER_ANALYSIS(
         ch_bqsr_bam_mito,
         ref_genome,
-        header
+        header,
+        mitocaller_result_filter_script,
+        mitomap,
+        mitotip,
+        mitimpact
     )
 
     emit:
-        //BWA_ALIGN_READS.out.aligned_bam
-        //GATK_BEST_PRACTICES.out.marked_dup_bam
         GATK_BEST_PRACTICES.out.bqsr_recal_table
         GATK_BEST_PRACTICES.out.bqsr_bam
         GATK_BEST_PRACTICES.out.gvcf_file
@@ -233,6 +235,7 @@ workflow TARGETED_ANALYSIS {
         GSEAPY.out.gseapy_output_dup_tsv
         SMACA.out.smaca_tsv
         MITOCALLER_ANALYSIS.out.mitocaller_output_summary
+        MITOCALLER_ANALYSIS.out.mitocaller_candidate_variants
         MITOCALLER_ANALYSIS.out.mitocaller_filtered_output
 
         versions = ch_versions
