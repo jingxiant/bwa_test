@@ -23,7 +23,7 @@ workflow MITOCALLER_ANALYSIS {
 
   emit:
   mitocaller_output_summary             = MITOCALLER.out[0]
-  mitocaller_candidate_variants  = FILTER_HETEROPLASMY.out[0]
+  mitocaller_candidate_variants         = FILTER_HETEROPLASMY.out[0]
   mitocaller_filtered_output            = COMPARE_SAMPLE_MITOMAP_MITOTIP.out[0]
   
 }
