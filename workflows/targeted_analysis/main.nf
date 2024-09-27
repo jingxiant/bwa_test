@@ -220,6 +220,13 @@ workflow TARGETED_ANALYSIS {
     tool_versions_ch = ch_versions.collectFile(name: 'versions.log', newLine: true, sort: false)
     tool_versions_ch.view()
 
+    //CHECK_FILE_VALIDITY(tool_versions_ch, modify_versions_log_script, parameters_file, BAM_QC.out.depth_of_coverage_stats, VEP_ANNOTATE.out.vep_tsv_filtered, VCF_FILTER_AND_DECOMPOSE.out.decom_norm_vcf, check_file_status_script, tabulate_samples_quality_script, check_sample_stats_script)
+    channel_for_filecheck = BAM_QC.out.depth_of_coverage_stats.join(VEP_ANNOTATE.out.vep_tsv_filtere).join(VCF_FILTER_AND_DECOMPOSE.out.decom_norm_vcf).join(EDIT_QUALIMAP_OUTPUT.out)
+                        channel_for_filecheck_processed = channel_for_filecheck.map { tuple ->
+                                def sampleName = tuple[0]
+                                def allFiles = tuple[1..-1].collectMany { it instanceof List ? it : [it] }
+                                [sampleName, allFiles]
+                        }
     CHECK_FILE_VALIDITY(tool_versions_ch, modify_versions_log_script, parameters_file, BAM_QC.out.depth_of_coverage_stats, VEP_ANNOTATE.out.vep_tsv_filtered, VCF_FILTER_AND_DECOMPOSE.out.decom_norm_vcf, check_file_status_script, tabulate_samples_quality_script, check_sample_stats_script)
 
     emit:
