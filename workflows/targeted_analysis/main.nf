@@ -184,7 +184,6 @@ workflow TARGETED_ANALYSIS {
         gseapy_enrich_script)
     ch_versions = ch_versions.mix(GSEAPY.out.versions)
 
-    ch_bqsr_bam = GATK_BEST_PRACTICES.out.bqsr_bam
     SMACA(
         ch_bqsr_bam,
         ref_genome,
