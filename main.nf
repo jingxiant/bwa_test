@@ -50,7 +50,7 @@ mitomap = file(params.mitomap)
 mitotip = file(params.mitotip)
 mitimpact = file(params.mitimpact)
 mitocaller_result_filter_script = file(params.mitocaller_result_filter)
-software_version_modify_script: "/prism_data4/share/PRISM_Scripts/Other_Scripts/modify_tools_version_output.py"
+software_version_modify_script = file(params.software_version_modify_script)
 
 
 /*
