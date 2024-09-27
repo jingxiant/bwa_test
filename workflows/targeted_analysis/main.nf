@@ -69,6 +69,10 @@ workflow TARGETED_ANALYSIS {
     gene_sets
     gseapy_enrich_script
     header
+    mitocaller_result_filter_script
+    mitomap
+    mitotip
+    mitimpact
 
     ch_versions
 
