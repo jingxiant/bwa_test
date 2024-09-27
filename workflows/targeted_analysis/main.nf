@@ -184,8 +184,9 @@ workflow TARGETED_ANALYSIS {
         gseapy_enrich_script)
     ch_versions = ch_versions.mix(GSEAPY.out.versions)
 
+    ch_bqsr_bam_smaca = GATK_BEST_PRACTICES.out.bqsr_bam
     SMACA(
-        ch_bqsr_bam,
+        ch_bqsr_bam_smaca,
         ref_genome,
         ref_genome_index
     )
@@ -218,7 +219,7 @@ workflow TARGETED_ANALYSIS {
         EXOMEDEPTH_POSTPROCESS.out.exomedepth_del_tsv_forgseapy
         EXOMEDEPTH_POSTPROCESS.out.exomedepth_dup_tsv_forgseapy
         GSEAPY.out.gseapy_output_tsv
-        //SMACA.out.smaca_tsv
+        SMACA.out.smaca_tsv
 
         versions = ch_versions
 }
