@@ -1,6 +1,6 @@
 include {GET_TOOLS_VERSION} from "../../modules/file_check"
 
-workfloe CHECK_FILE_VALIDIFTY {
+workfloe CHECK_FILE_VALIDITY {
 
   take:
   ch_versions_log
