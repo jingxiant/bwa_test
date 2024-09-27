@@ -175,7 +175,7 @@ workflow TARGETED_ANALYSIS {
         decipher
     )
 
-    ch_merged_filtered_tsv_for_gseapy = EXOMEDEPTH_POSTPROCESS.out.exomedepth_del_tsv_forgseapy.combine(EXOMEDEPTH_POSTPROCESS.out.exomedepth_dup_tsv_forgseapy)
+    ch_merged_filtered_tsv_for_gseapy = EXOMEDEPTH_POSTPROCESS.out.collect()
     GSEAPY(
         ch_merged_filtered_tsv_for_gseapy, 
         gene_sets,
