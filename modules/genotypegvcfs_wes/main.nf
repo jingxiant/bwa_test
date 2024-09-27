@@ -21,7 +21,7 @@ process GENOTYPEGVCFS {
         gatk CombineGVCFs -R $params.ref -V gvcf.list -O ${samplename}.combinedgvcf.vcf.gz
         gatk GenotypeGVCFs -R $params.ref -V ${samplename}.combinedgvcf.vcf.gz  -O ${samplename}.${params.timestamp}.raw.vcf.gz -L $target_bed
         
-        cat <<END_VERSIONS > versions.yml
+        cat <<-END_VERSIONS > versions.yml
         ${task.process}\tgatk:\$(echo \$(gatk --version 2>&1) | sed 's/^.*(GATK) v//; s/ .*\$//')
         """
 }
