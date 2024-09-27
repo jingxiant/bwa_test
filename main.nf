@@ -43,6 +43,8 @@ exomedepth_deletion_db = file(params.exomedepth_deletion_db)
 exomedepth_duplication_db = file(params.exomedepth_duplication_db)
 process_script_single = file(params.process_script_single)
 panel = file(params.panel)
+gene_sets=file(params.gene_sets)
+gseapy_enrich_script=file(params.gseapy_enrich_script)
 
 /*
 ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
@@ -110,6 +112,8 @@ workflow PRISM_TARGETED_ANALYSIS {
         process_script_single,
         panel,
         decipher,
+        gene_sets,
+        gseapy_enrich_script,
         ch_versions
     )
     ch_versions = ch_versions.mix(TARGETED_ANALYSIS.out.versions)
