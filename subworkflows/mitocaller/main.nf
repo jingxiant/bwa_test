@@ -17,5 +17,5 @@ workflow MITOCALLER_ANALYSIS {
 
   emit:
   mitocaller_output_summary   = MITOCALLER.out[0]
-  mitocaller_filtered_output  = FILTER_HETEROPLASMY[0]
+  mitocaller_filtered_output  = FILTER_HETEROPLASMY.out[0]
 }
