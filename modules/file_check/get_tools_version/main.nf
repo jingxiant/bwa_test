@@ -1,4 +1,4 @@
-fprocess GET_TOOLS_VERSION {
+process GET_TOOLS_VERSION {
 
         container 'jxprismdocker/prism_python3'
         publishDir "$params.publishdir/Log_files", mode: 'copy'
