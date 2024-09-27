@@ -15,5 +15,5 @@ workflow CHECK_FILE_VALIDITY {
 
   emit:
   version_txt       = GET_TOOLS_VERSION.out[0]
-  params_logs       = LOG_PARAMS.out
+  params_log       = LOG_PARAMS.out
 }
