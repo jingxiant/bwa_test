@@ -219,7 +219,7 @@ workflow TARGETED_ANALYSIS {
         EXOMEDEPTH_POSTPROCESS.out.exomedepth_del_tsv_forgseapy
         EXOMEDEPTH_POSTPROCESS.out.exomedepth_dup_tsv_forgseapy
         GSEAPY.out.gseapy_output_tsv
-        SMACA.out.smaca_tsv
+        //SMACA.out.smaca_tsv
 
         versions = ch_versions
 }
