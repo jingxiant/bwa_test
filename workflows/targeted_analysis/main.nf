@@ -18,6 +18,7 @@ include { EXOMEDEPTH_CNV_CALLING } from "../../subworkflows/exomedepth"
 include { EXOMEDEPTH_CNV_CALLING } from "../../subworkflows/exomedepth"
 include { SVAFOTATE } from "../../subworkflows/svafotate"
 include { EXOMEDEPTH_POSTPROCESS } from "../../subworkflows/exomedepth_postprocess"
+include { GSEAPY } from "../../subworkflows/gseapy"
 
 /*
 ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
@@ -63,6 +64,8 @@ workflow TARGETED_ANALYSIS {
     process_script_single
     panel
     decipher
+    gene_sets
+    gseapy_enrich_script
 
     ch_versions
 
@@ -171,6 +174,13 @@ workflow TARGETED_ANALYSIS {
         mutation_spectrum,
         decipher
     )
+
+    ch_merged_filtered_tsv_for_gseapy = EXOMEDEPTH_POSTPROCESS.out.exomedepth_del_tsv_forgseapy.join(EXOMEDEPTH_POSTPROCESS.out.exomedepth_dup_tsv_forgseapy)
+    GSEAPY(
+        ch_merged_filtered_tsv_for_gseapy, 
+        gene_sets,
+        gseapy_enrich_script)
+    ch_versions = ch_versions.mix(GSEAPY.out.versions)
     
     emit:
         //BWA_ALIGN_READS.out.aligned_bam
@@ -198,6 +208,7 @@ workflow TARGETED_ANALYSIS {
         EXOMEDEPTH_POSTPROCESS.out.exomedepth_postprocess_tsv
         EXOMEDEPTH_POSTPROCESS.out.exomedepth_del_tsv_forgseapy
         EXOMEDEPTH_POSTPROCESS.out.exomedepth_dup_tsv_forgseapy
+        GSEAPY.out.gseapy_output_tsv
 
         versions = ch_versions
 }
