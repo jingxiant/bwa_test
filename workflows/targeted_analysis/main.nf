@@ -175,13 +175,14 @@ workflow TARGETED_ANALYSIS {
         decipher
     )
 
-    ch_merged_filtered_tsv_for_gseapy = EXOMEDEPTH_POSTPROCESS.out.collect()
+    EXOMEDEPTH_POSTPROCESS.out.exomedepth_del_tsv_forgseapy.join(EXOMEDEPTH_POSTPROCESS.out.exomedepth_dup_tsv_forgseapy).view()
+    /*ch_merged_filtered_tsv_for_gseapy = EXOMEDEPTH_POSTPROCESS.out.collect()
     GSEAPY(
         ch_merged_filtered_tsv_for_gseapy, 
         gene_sets,
         gseapy_enrich_script)
     ch_versions = ch_versions.mix(GSEAPY.out.versions)
-    
+    */
     emit:
         //BWA_ALIGN_READS.out.aligned_bam
         //GATK_BEST_PRACTICES.out.marked_dup_bam
