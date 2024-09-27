@@ -133,7 +133,7 @@ workflow PRISM_TARGETED_ANALYSIS {
         params_file,
         check_file_status_script,
         tabulate_samples_quality_script,
-        check_sample_stats_script
+        check_sample_stats_script,
         
         ch_versions
     )
