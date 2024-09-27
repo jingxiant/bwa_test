@@ -76,6 +76,9 @@ workflow TARGETED_ANALYSIS {
     mitimpact
     modify_versions_log_script
     parameters_file
+    check_file_status_script
+    tabulate_samples_quality_script
+    check_sample_stats_script
 
     ch_versions
 
@@ -217,7 +220,7 @@ workflow TARGETED_ANALYSIS {
     tool_versions_ch = ch_versions.collectFile(name: 'versions.log', newLine: true, sort: false)
     tool_versions_ch.view()
 
-    CHECK_FILE_VALIDITY(tool_versions_ch, modify_versions_log_script, parameters_file)
+    CHECK_FILE_VALIDITY(tool_versions_ch, modify_versions_log_script, parameters_file, BAM_QC.out.depth_of_coverage_stats, VEP_ANNOTATE.out.vep_tsv_filtered, VCF_FILTER_AND_DECOMPOSE.out.decom_norm_vcf, check_file_status_script, tabulate_samples_quality_script, check_sample_stats_script)
 
     emit:
         GATK_BEST_PRACTICES.out.bqsr_recal_table
@@ -251,6 +254,7 @@ workflow TARGETED_ANALYSIS {
         MITOCALLER_ANALYSIS.out.mitocaller_filtered_output
         CHECK_FILE_VALIDITY.out.version_txt
         CHECK_FILE_VALIDITY.out.params_log
+        CHECK_FILE_VALIDITY.out.check_file_validity_wes_multisample_output
 
         versions = ch_versions
 }
