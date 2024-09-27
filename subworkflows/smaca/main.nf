@@ -1,4 +1,4 @@
-include {SMACA_BAM} from ""../../modules/smaca"
+include {SMACA_BAM} from "../../modules/smaca"
 
 workflow SMACA {
 
