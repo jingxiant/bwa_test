@@ -55,6 +55,7 @@ params_file = file(params.params_file)
 check_file_status_script = file(params.check_file_status_script)
 tabulate_samples_quality_script = file(params.tabulate_samples_quality_script)
 check_sample_stats_script = file(params.check_sample_stats_script)
+rmd_template = file(params.report_template)
 
 /*
 ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
@@ -134,6 +135,7 @@ workflow PRISM_TARGETED_ANALYSIS {
         check_file_status_script,
         tabulate_samples_quality_script,
         check_sample_stats_script,
+        rmd_template,
         
         ch_versions
     )
