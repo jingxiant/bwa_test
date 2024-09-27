@@ -52,7 +52,9 @@ mitimpact = file(params.mitimpact)
 mitocaller_result_filter_script = file(params.mitocaller_result_filter)
 software_version_modify_script = file(params.software_version_modify_script)
 params_file = file(params.params_file)
-
+check_file_status_script = file(params.check_file_status_script)
+tabulate_samples_quality_script = file(params.tabulate_samples_quality_script)
+check_sample_stats_script = file(params.check_sample_stats_script)
 
 /*
 ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
@@ -129,6 +131,9 @@ workflow PRISM_TARGETED_ANALYSIS {
         mitimpact,
         software_version_modify_script,
         params_file,
+        check_file_status_script,
+        tabulate_samples_quality_script,
+        check_sample_stats_script
         
         ch_versions
     )
