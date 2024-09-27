@@ -20,6 +20,7 @@ include { SVAFOTATE } from "../../subworkflows/svafotate"
 include { EXOMEDEPTH_POSTPROCESS } from "../../subworkflows/exomedepth_postprocess"
 include { GSEAPY } from "../../subworkflows/gseapy"
 include { SMACA } from "../../subworkflows/smaca"
+include { MITOCALLER } from "../../subworkflows/mitocaller"
 
 /*
 ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
@@ -194,6 +195,12 @@ workflow TARGETED_ANALYSIS {
     )
     ch_versions = ch_versions.mix(SMACA.out.versions)
 
+    ch_bqsr_bam_mito = GATK_BEST_PRACTICES.out.bqsr_bam
+    MITOCALLER(
+        ch_bqsr_bam_mito,
+        ref_genome
+    )
+
     emit:
         //BWA_ALIGN_READS.out.aligned_bam
         //GATK_BEST_PRACTICES.out.marked_dup_bam
@@ -223,6 +230,7 @@ workflow TARGETED_ANALYSIS {
         GSEAPY.out.gseapy_output_del_tsv
         GSEAPY.out.gseapy_output_dup_tsv
         SMACA.out.smaca_tsv
+        MITOCALLER.out.mitocaller_output_summary
 
         versions = ch_versions
 }
