@@ -198,7 +198,8 @@ workflow TARGETED_ANALYSIS {
     ch_bqsr_bam_mito = GATK_BEST_PRACTICES.out.bqsr_bam
     MITOCALLER_ANALYSIS(
         ch_bqsr_bam_mito,
-        ref_genome
+        ref_genome,
+        header
     )
 
     emit:
@@ -231,6 +232,7 @@ workflow TARGETED_ANALYSIS {
         GSEAPY.out.gseapy_output_dup_tsv
         SMACA.out.smaca_tsv
         MITOCALLER_ANALYSIS.out.mitocaller_output_summary
+        MITOCALLER_ANALYSIS.out.mitocaller_filtered_output
 
         versions = ch_versions
 }
