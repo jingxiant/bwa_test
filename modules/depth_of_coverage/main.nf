@@ -12,7 +12,7 @@ process DEPTH_OF_COVERAGE_WES {
         file(target_bed)
 
         output:
-        file("${sampleid}*")
+        tuple val(sampleid), file("${sampleid}*")
         path "versions.yml", emit: versions
 
         script:
