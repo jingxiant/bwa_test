@@ -18,7 +18,7 @@ process SMACA_BAM {
         smaca --reference hg38 --output smaca.${params.timestamp}.result.tsv \$(cat bam.list)
         
         cat <<-END_VERSIONS > versions.yml
-        SMACA\tsmaca:\$(pip show smaca 2>&1 | grep "Version" | sed 's/Version: //g')
+                SMACA\tsmaca:\$(pip show smaca 2>&1 | grep "Version" | sed 's/Version: //g')
         END_VERSIONS
         """
 }
