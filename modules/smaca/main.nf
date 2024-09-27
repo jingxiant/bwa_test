@@ -20,6 +20,5 @@ process SMACA_BAM {
         cat <<END_VERSIONS > versions.yml
                 ${task.process}\tgatk:\$(echo \$(gatk --version 2>&1) | sed 's/^.*(GATK) v//; s/ .*\$//')
         END_VERSIONS
-
         """
 }
