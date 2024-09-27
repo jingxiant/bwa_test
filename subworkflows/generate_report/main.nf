@@ -9,7 +9,9 @@ workflow GENERATE_REPORT {
   panel
   
   main:
-  GENERATE_REPORT_RMARKDOWN_SINGLESAMPLE(ch_for_rmarkdown, rmd_template, resources_log, panel)
+  if(params.genotyping_mode == 'single'){
+    GENERATE_REPORT_RMARKDOWN_SINGLESAMPLE(ch_for_rmarkdown, rmd_template, resources_log, panel)
+  }
 
   emit:
   sample_report      = GENERATE_REPORT_RMARKDOWN_SINGLESAMPLE.out[0]
