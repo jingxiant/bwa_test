@@ -4,7 +4,7 @@ process SMACA_BAM {
         container 'limwwan/smaca'
 
         input: 
-        tuple val(samplename), file(bam), file(bam_index)
+        file(bam)
         file(ref_fa)
         file(ref_fai)
 
