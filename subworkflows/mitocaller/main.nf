@@ -2,7 +2,7 @@ include { EXTRACT_MTDNA_BAM } from "../../modules/mitocaller/extract_mtdna"
 include { MITOCALLER } from "../../modules/mitocaller/run_mitocaller"
 
 
-workflow MITOCALLER {
+workflow MITOCALLER_ANALYSIS {
 
   take:
   ch_recalbam
