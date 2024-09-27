@@ -81,6 +81,7 @@ workflow TARGETED_ANALYSIS {
     tabulate_samples_quality_script
     check_sample_stats_script
     rmd_template
+    verifybamid_resources
 
     ch_versions
 
@@ -144,7 +145,8 @@ workflow TARGETED_ANALYSIS {
         target_bed_covered,
         ref_genome,
         ref_genome_index,
-        refgene_track
+        refgene_track,
+        verifybamid_resources
     )
     ch_versions = ch_versions.mix(BAM_QC.out.versions)
 
@@ -269,6 +271,7 @@ workflow TARGETED_ANALYSIS {
         AUTOSOLVE_MULTISAMPLE.out.autosolve_tsv
         BAM_QC.out.qualimap_stats
         BAM_QC.out.depth_of_coverage_stats
+        BAM_QC.out.verifybam_id_output
         EXOMEDEPTH_CNV_CALLING.out.exomedepth_tsv
         EXOMEDEPTH_CNV_CALLING.out.exomedepth_png
         EXOMEDEPTH_CNV_CALLING.out.exomedepth_rds
