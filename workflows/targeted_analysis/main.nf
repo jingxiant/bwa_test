@@ -68,6 +68,7 @@ workflow TARGETED_ANALYSIS {
     decipher
     gene_sets
     gseapy_enrich_script
+    header
 
     ch_versions
 
