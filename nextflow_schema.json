@@ -96,7 +96,8 @@
                 "default": "/prism_data4/share/PRISM_Resources/Exomedepth/change_symbol_bed/gene.hg38.new.v2.uniq.bed"
                 },
               "exomedepth_control": {
-                "type": "string"
+                "type": "string",
+                "default": "/prism_data5/share/jingxian/test_githhub_bwa/exomedepth_controls/*.{bam,bai}"
                 }
             },
             "required": [
