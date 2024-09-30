@@ -34,12 +34,12 @@
                 },
                 "timestamp": {
                     "type": "string",
-                    "description": "The date the analysis occured."
+                    "description": "The date the analysis occured. (eg. 2024-09-30)"
                 },
                 "publishdir": {
                     "type": "string",
-                    "description": "The output directory where the results will be saved.",
-                    "default": "results"
+                    "description": "Path to output directory where the results will be saved.",
+                    "default": "./results"
                 },
                 "pattern": {
                     "type": "string",
@@ -54,7 +54,7 @@
                 "params_file": {
                     "type": "string",
                     "description": "The file containing parameters used for the analysis, which is essential for generating the log.",
-                    "default": "params.yaml"
+                    "default": "./params.yaml"
                 }
             },
             "required": [
@@ -74,10 +74,12 @@
             "properties": {
                 "target_bed": {
                     "type": "string",
+                    "description": "Target bed file (padded).",
                     "default": "/prism_data5/share/KKH_Repository/Carrier_Screening/Target/Agilent_Regions_Mod_V3.Padded.bed"
                 },
                 "target_bed_covered": {
                     "type": "string",
+                    "description": "Target bed file (covered).",
                     "default": "/prism_data5/share/KKH_Repository/Carrier_Screening/Target/Agilent_Regions_Mod_V3.Covered.bed"
                 }
             },
