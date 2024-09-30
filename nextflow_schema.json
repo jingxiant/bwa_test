@@ -1,71 +1,435 @@
 {
-    "$schema": "http://json-schema.org/draft-07/schema",
-    "$id": "https://github.com/jingxiant/targeted_analysis/nextflow_schema.json",
-    "title": "Nextflow pipeline parameters",
-    "description": "This pipeline uses Nextflow and processes some kind of data. The JSON Schema was built using the nf-core pipeline schema builder.",
-    "type": "object",
-    "definitions": {
-        "input_output_options": {
-            "title": "Input/output options",
-            "type": "object",
-            "description": "",
-            "default": "",
-            "properties": {
-                "input": {
-                    "type": "string",
-                    "description": "Path to FASTQ files."
-                },
-                "genotyping_mode": {
-                    "type": "string",
-                    "description": "Specifies the genotyping approach to be used in the analysis",
-                    "default": "single",
-                    "enum": [
-                        "single",
-                        "joint"
-                    ]
-                },
-                "proband": {
-                    "type": "string",
-                    "description": "Proband ID."
-                },
-                "timestamp": {
-                    "type": "string",
-                    "description": "The date the analysis occured."
-                },
-                "publishdir": {
-                    "type": "string",
-                    "description": "The output directory where the results will be saved.",
-                    "default": "results"
-                },
-                "pattern": {
-                    "type": "string",
-                    "default": "_",
-                    "description": "The character used to split the string and extract the sample name."
-                },
-                "join_number": {
-                    "type": "string",
-                    "description": "An index used to specify which parts of the split string to concatenate back together to form the sample name.",
-                    "default": "0"
-                },
-                "params_file": {
-                    "type": "string",
-                    "description": "The file containing parameters used for the analysis, which is essential for generating the log.",
-                    "default": "params.yaml"
-                }
-            },
-            "required": [
-                "genotyping_mode",
-                "proband",
-                "timestamp",
-                "pattern",
-                "join_number",
-                "params_file"
-            ]
+  "$schema": "http://json-schema.org/draft-07/schema",
+  "$id": "https://github.com/jingxiant/targeted_analysis/nextflow_schema.json",
+  "title": "Nextflow pipeline parameters",
+  "description": "This pipeline uses Nextflow and processes some kind of data. The JSON Schema was built using the nf-core pipeline schema builder.",
+  "type": "object",
+  "definitions": {
+    "input_output_options": {
+      "title": "Input/output options",
+      "type": "object",
+      "description": "",
+      "default": "",
+      "properties": {
+        "input": {
+          "type": "string",
+          "description": "Path to FASTQ files."
+        },
+        "genotyping_mode": {
+          "type": "string",
+          "description": "Specifies the genotyping approach to be used in the analysis",
+          "enum": ["single", "joint"]
+        },
+        "proband": {
+          "type": "string",
+          "description": "Proband ID."
+        },
+        "timestamp": {
+          "type": "string",
+          "description": "The date the analysis occured."
+        },
+        "publishdir": {
+          "type": "string",
+          "description": "The output directory where the results will be saved.",
+          "default": "results"
+        },
+        "pattern": {
+          "type": "string",
+          "default": "_",
+          "description": "The character used to split the string and extract the sample name."
+        },
+        "join_number": {
+          "type": "string",
+          "description": "An index used to specify which parts of the split string to concatenate back together to form the sample name.",
+          "default": 0
+        },
+        "params_file": {
+          "type": "string",
+          "description": "The file containing parameters used for the analysis, which is essential for generating the log.",
+          "default": "params.yaml"
         }
+      },
+      "required": [
+        "genotyping_mode",
+        "proband",
+        "timestamp",
+        "pattern",
+        "join_number",
+        "params_file"
+      ]
     },
-    "allOf": [
-        {
-            "$ref": "#/definitions/input_output_options"
+    "target_bed": {
+      "title": "Target bed files",
+      "type": "object",
+      "description": "",
+      "default": "",
+      "properties": {
+        "target_bed": {
+          "type": "string"
+        },
+        "target_bed_covered": {
+          "type": "string"
         }
-    ]
+      }
+    },
+    "reference_genome": {
+      "title": "Reference genome",
+      "type": "object",
+      "description": "",
+      "default": "",
+      "properties": {
+        "ref": {
+          "type": "string"
+        },
+        "ref_fai": {
+          "type": "string"
+        }
+      }
+    },
+    "gatk_resources": {
+      "title": "GATK Resources",
+      "type": "object",
+      "description": "",
+      "default": "",
+      "properties": {
+        "known_snps_dbsnp": {
+          "type": "string"
+        },
+        "known_indels": {
+          "type": "string"
+        }
+      }
+    },
+    "vep_resources": {
+      "title": "VEP Resources",
+      "type": "object",
+      "description": "",
+      "default": "",
+      "properties": {
+        "vep_cache_dir": {
+          "type": "string"
+        },
+        "vep_cache_plugin_dir": {
+          "type": "string"
+        },
+        "vep_plugin_dir": {
+          "type": "string"
+        },
+        "vep_commands": {
+          "type": "string"
+        },
+        "fields_recipe": {
+          "type": "string"
+        },
+        "dbNSFP": {
+          "type": "string"
+        },
+        "SpliceAI_snp": {
+          "type": "string"
+        },
+        "SpliceAI_indel": {
+          "type": "string"
+        },
+        "gnomad_exomes": {
+          "type": "string"
+        },
+        "gnomad_genomes": {
+          "type": "string"
+        },
+        "clinvar": {
+          "type": "string"
+        },
+        "SEC": {
+          "type": "string"
+        },
+        "PRISM_Interpretation": {
+          "type": "string"
+        },
+        "sg10k": {
+          "type": "string"
+        },
+        "AlphaMissense": {
+          "type": "string"
+        }
+      }
+    },
+    "postprocess_scripts": {
+      "title": "Post-process scripts",
+      "type": "object",
+      "description": "",
+      "default": "",
+      "properties": {
+        "vcf_to_tsv": {
+          "type": "string"
+        },
+        "tsv_to_xlsx": {
+          "type": "string"
+        },
+        "mane_transcript": {
+          "type": "string"
+        }
+      }
+    },
+    "slivar_resources": {
+      "title": "Slivar Resources",
+      "type": "object",
+      "description": "",
+      "default": "",
+      "properties": {
+        "panel_monoallelic": {
+          "type": "string"
+        },
+        "panel_biallelic": {
+          "type": "string"
+        },
+        "autosolve_script": {
+          "type": "string"
+        }
+      }
+    },
+    "exomedepth": {
+      "title": "ExomeDepth",
+      "type": "object",
+      "description": "",
+      "default": "",
+      "properties": {
+        "chr": {
+          "type": "string",
+          "default": "chr1,chr2,chr3,chr4,chr5,chr6,chr7,chr8,chr9,chr10,chr11,chr12,chr13,chr14,chr15,chr16,chr17,chr18,chr19,chr20,chr21,chr22,chrX"
+        },
+        "exomedepth_target_bed": {
+          "type": "string"
+        },
+        "exomedepth_gene_bed": {
+          "type": "string"
+        },
+        "exomedepth_control": {
+          "type": "string"
+        },
+        "gene_sets": {
+          "type": "string"
+        }
+      }
+    },
+    "refseq_gene_track": {
+      "title": "Refseq file",
+      "type": "object",
+      "description": "",
+      "default": "",
+      "properties": {
+        "refseq_gene_track": {
+          "type": "string"
+        }
+      }
+    },
+    "exomedepth_postprocess": {
+      "title": "ExomeDepth post-process",
+      "type": "object",
+      "description": "",
+      "default": "",
+      "properties": {
+        "panel": {
+          "type": "string"
+        },
+        "clingen": {
+          "type": "string"
+        },
+        "process_script_family": {
+          "type": "string"
+        },
+        "process_script_single": {
+          "type": "string"
+        },
+        "decipher": {
+          "type": "string"
+        },
+        "mutation_spectrum": {
+          "type": "string"
+        }
+      }
+    },
+    "exomedepth_filter_for_gseqpy": {
+      "title": "ExomeDepth filter for gseapy",
+      "type": "object",
+      "description": "",
+      "default": "",
+      "properties": {
+        "exomedepth_gseapy_filter": {
+          "type": "string"
+        },
+        "exomedepth_annotate_counts_script": {
+          "type": "string"
+        },
+        "exomedepth_deletion_db": {
+          "type": "string"
+        },
+        "exomedepth_duplication_db": {
+          "type": "string"
+        }
+      }
+    },
+    "svafotate": {
+      "title": "SVAFotate",
+      "type": "object",
+      "description": "",
+      "default": "",
+      "properties": {
+        "svafotate_bed": {
+          "type": "string"
+        },
+        "convert_tsv_to_vcf_script": {
+          "type": "string"
+        },
+        "add_svaf_script": {
+          "type": "string"
+        }
+      }
+    },
+    "gseapy": {
+      "title": "GSEAPY script",
+      "type": "object",
+      "description": "",
+      "default": "",
+      "properties": {
+        "gseapy_enrich_script": {
+          "type": "string"
+        }
+      }
+    },
+    "mitocaller_and_mitotip": {
+      "title": "Mitocaller and Mitotip",
+      "type": "object",
+      "description": "",
+      "default": "",
+      "properties": {
+        "header": {
+          "type": "string"
+        },
+        "mitomap": {
+          "type": "string"
+        },
+        "mitotip": {
+          "type": "string"
+        },
+        "pathogenic_hetero": {
+          "type": "string"
+        },
+        "mitocaller_result_filter": {
+          "type": "string"
+        },
+        "mitimpact": {
+          "type": "string"
+        }
+      }
+    },
+    "get_tools_version": {
+      "title": "Get tools version",
+      "type": "object",
+      "description": "",
+      "default": "",
+      "properties": {
+        "software_version_modify_script": {
+          "type": "string"
+        }
+      }
+    },
+    "file_check": {
+      "title": "File check",
+      "type": "object",
+      "description": "",
+      "default": "",
+      "properties": {
+        "check_file_status_script": {
+          "type": "string"
+        },
+        "tabulate_samples_quality_script": {
+          "type": "string"
+        },
+        "check_sample_stats_script": {
+          "type": "string"
+        }
+      }
+    },
+    "report_generation": {
+      "title": "Report generation",
+      "type": "object",
+      "description": "",
+      "default": "",
+      "properties": {
+        "report_template": {
+          "type": "string"
+        }
+      }
+    },
+    "verifybamid": {
+      "title": "VerifyBAMID",
+      "type": "object",
+      "description": "",
+      "default": "",
+      "properties": {
+        "verifybamid_resources_wes": {
+          "type": "string"
+        },
+        "verifybamid_resources_wgs": {
+          "type": "string"
+        }
+      }
+    }
+  },
+  "allOf": [
+    {
+      "$ref": "#/definitions/input_output_options"
+    },
+    {
+      "$ref": "#/definitions/target_bed"
+    },
+    {
+      "$ref": "#/definitions/reference_genome"
+    },
+    {
+      "$ref": "#/definitions/gatk_resources"
+    },
+    {
+      "$ref": "#/definitions/vep_resources"
+    },
+    {
+      "$ref": "#/definitions/postprocess_scripts"
+    },
+    {
+      "$ref": "#/definitions/slivar_resources"
+    },
+    {
+      "$ref": "#/definitions/exomedepth"
+    },
+    {
+      "$ref": "#/definitions/refseq_gene_track"
+    },
+    {
+      "$ref": "#/definitions/exomedepth_postprocess"
+    },
+    {
+      "$ref": "#/definitions/exomedepth_filter_for_gseqpy"
+    },
+    {
+      "$ref": "#/definitions/svafotate"
+    },
+    {
+      "$ref": "#/definitions/gseapy"
+    },
+    {
+      "$ref": "#/definitions/mitocaller_and_mitotip"
+    },
+    {
+      "$ref": "#/definitions/get_tools_version"
+    },
+    {
+      "$ref": "#/definitions/file_check"
+    },
+    {
+      "$ref": "#/definitions/report_generation"
+    },
+    {
+      "$ref": "#/definitions/verifybamid"
+    }
+  ]
 }
