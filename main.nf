@@ -74,8 +74,21 @@ verifybamid_resources = file(params.verifybamid_resources_wes)
 // Get sample id
 //
 def getLibraryId( file ) {
-        file.split(/\//)[-1].split(/_/)[0]
+    def filename = file.split(/\//)[-1]  // Extract filename from the full path
+    def pattern = params.pattern  // Pattern to split the filename
+    def join_number = params.join_number.toString().split(',').collect { it as int }
+    // Split the filename by the given pattern
+    def parts = filename.split(pattern)
+
+    // Concatenate parts based on join_number indices
+    def libraryId = join_number.collect { parts[it] }.join('_') 
+
+    return libraryId
 }
+
+//def getLibraryId( file ) {
+//        file.split(/\//)[-1].split(/_/)[0]
+//}
 
 include {TARGETED_ANALYSIS} from "./workflows/targeted_analysis"
 
