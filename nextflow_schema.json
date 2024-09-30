@@ -87,9 +87,6 @@
             "description": "",
             "default": "",
             "properties": {
-              "case": {
-                "type": "string"
-                },
               "exomedepth_target_bed": {
                 "type": "string",
                 "default": "/prism_data4/share/PRISM_Resources/Exomedepth/MappibilityScore_Filtering/exon.hg38.new.mappibilityScore.mt075.withMendeliomeGenes_lt075.first4col.changedSymbol.bed"
@@ -100,7 +97,7 @@
                 },
               "exomedepth_control": {
                 "type": "string"
-                },
+                }
             },
             "required": [
                 "exomedepth_target_bed",
