@@ -1,4 +1,4 @@
-Simple nextflow script
+Introduction
 ====================
 
-Nextflow script to run bwa on a small data set.
+PRISM targeted pipeline 
