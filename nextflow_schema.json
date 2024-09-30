@@ -19,7 +19,7 @@
                     "type": "string",
                     "description": "Pattern to read fastq file(s).",
                     "default": "*_R{1,2}.{fq,fastq}.gz"
-                }
+                },
                 "genotyping_mode": {
                     "type": "string",
                     "description": "Specifies the genotyping approach to be used in the analysis",
