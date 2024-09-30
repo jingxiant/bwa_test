@@ -1,0 +1,71 @@
+{
+    "$schema": "http://json-schema.org/draft-07/schema",
+    "$id": "https://raw.githubusercontent.com/YOUR_PIPELINE/master/nextflow_schema.json",
+    "title": "Nextflow pipeline parameters",
+    "description": "This pipeline uses Nextflow and processes some kind of data. The JSON Schema was built using the nf-core pipeline schema builder.",
+    "type": "object",
+    "definitions": {
+        "input_output_options": {
+            "title": "Input/output options",
+            "type": "object",
+            "description": "",
+            "default": "",
+            "properties": {
+                "input": {
+                    "type": "string",
+                    "description": "Path to FASTQ files."
+                },
+                "genotyping_mode": {
+                    "type": "string",
+                    "description": "Specifies the genotyping approach to be used in the analysis",
+                    "default": "single",
+                    "enum": [
+                        "single",
+                        "joint"
+                    ]
+                },
+                "proband": {
+                    "type": "string",
+                    "description": "Proband ID."
+                },
+                "timestamp": {
+                    "type": "string",
+                    "description": "The date the analysis occured."
+                },
+                "publishdir": {
+                    "type": "string",
+                    "description": "The output directory where the results will be saved.",
+                    "default": "results"
+                },
+                "pattern": {
+                    "type": "string",
+                    "default": "_",
+                    "description": "The character used to split the string and extract the sample name."
+                },
+                "join_number": {
+                    "type": "string",
+                    "description": "An index used to specify which parts of the split string to concatenate back together to form the sample name.",
+                    "default": "0"
+                },
+                "params_file": {
+                    "type": "string",
+                    "description": "The file containing parameters used for the analysis, which is essential for generating the log.",
+                    "default": "params.yaml"
+                }
+            },
+            "required": [
+                "genotyping_mode",
+                "proband",
+                "timestamp",
+                "pattern",
+                "join_number",
+                "params_file"
+            ]
+        }
+    },
+    "allOf": [
+        {
+            "$ref": "#/definitions/input_output_options"
+        }
+    ]
+}
