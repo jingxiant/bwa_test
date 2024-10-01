@@ -260,6 +260,11 @@ workflow TARGETED_ANALYSIS {
                                                   [sampleName, allFiles]
                                     }
     }
+
+    if(params.genotyping_mode == 'joint'){
+        ch_for_rmarkdown_processed = ''
+    }
+    
     
     
     GENERATE_REPORT(
