@@ -233,7 +233,7 @@ workflow TARGETED_ANALYSIS {
       }
 
     if(params.genotyping_mode == 'joint'){
-        ch_for_filecheck_processed = ''
+        ch_for_filecheck_processed = Channel.empty()
     }
 
     CHECK_FILE_VALIDITY(
@@ -262,7 +262,7 @@ workflow TARGETED_ANALYSIS {
     }
 
     if(params.genotyping_mode == 'joint'){
-        ch_for_rmarkdown_processed = ''
+        ch_for_rmarkdown_processed = Channel.empty()
     }
     
     
