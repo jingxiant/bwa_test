@@ -34,5 +34,5 @@ workflow CHECK_FILE_VALIDITY {
   version_txt                                  = GET_TOOLS_VERSION.out[0]
   params_log                                   = LOG_PARAMS.out
   check_file_validity_wes_singlesample_output  = CHECK_FILE_VALIDITY_WES_SINGLESAMPLE.out[0]
-  }
+  
 }
