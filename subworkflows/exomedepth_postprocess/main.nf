@@ -30,7 +30,8 @@ workflow EXOMEDEPTH_POSTPROCESS {
     EXOMEDEPTH_POSTPROCESS_SINGLE(exomedepth_ch.join(ch_vcf_filtered_tsv), process_script_single, panel, clingen, mutation_spectrum, decipher)
     postprocess_result = EXOMEDEPTH_POSTPROCESS_SINGLE.out
   }
-  else if(params.genotyping_mode == 'joint'){
+
+  if(params.genotyping_mode == 'joint'){
     EXOMEDEPTH_POSTPROCESS_COHORT(exomedepth_ch, ch_vcf_filtered_tsv, process_script_single, panel, clingen, mutation_spectrum, decipher)
     postprocess_result = EXOMEDEPTH_POSTPROCESS_COHORT.out
   }
@@ -39,8 +40,7 @@ workflow EXOMEDEPTH_POSTPROCESS {
 
   emit:
   exomedepth_merged_filtered_tsv    = EXOMEDEPTH_FILTER_MERGE_TSV.out
-  exomedepth_postprocess_tsv        = postprocess_result
-  exomedepth_postprocess_tsv        = EXOMEDEPTH_POSTPROCESS_SINGLE.out
+  postprocess_result
   exomedepth_del_tsv_forgseapy      = EXOMEDEPTH_FILTER_FOR_GSEAPY.out[0]
   exomedepth_dup_tsv_forgseapy      = EXOMEDEPTH_FILTER_FOR_GSEAPY.out[1]
 }
