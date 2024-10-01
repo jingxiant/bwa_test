@@ -32,7 +32,8 @@ workflow EXOMEDEPTH_POSTPROCESS {
   }
 
   if(params.genotyping_mode == 'joint'){
-    EXOMEDEPTH_POSTPROCESS_COHORT(exomedepth_ch, ch_vcf_filtered_tsv, process_script_single, panel, clingen, mutation_spectrum, decipher)
+    EXOMEDEPTH_POSTPROCESS_SINGLE(exomedepth_ch.join(ch_vcf_filtered_tsv), process_script_single, panel, clingen, mutation_spectrum, decipher)
+    //EXOMEDEPTH_POSTPROCESS_COHORT(exomedepth_ch, ch_vcf_filtered_tsv, process_script_single, panel, clingen, mutation_spectrum, decipher)
     postprocess_result = EXOMEDEPTH_POSTPROCESS_COHORT.out
   }
 
