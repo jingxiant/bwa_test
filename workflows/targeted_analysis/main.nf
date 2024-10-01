@@ -240,6 +240,11 @@ workflow TARGETED_ANALYSIS {
             check_file_status_script, 
             tabulate_samples_quality_script, 
             check_sample_stats_script,
+            BAM_QC.out.depth_of_coverage_stats.flatten(), 
+            VEP_ANNOTATE.out.vep_tsv_filtered, 
+            VCF_FILTER_AND_DECOMPOSE.out.decom_norm_vcf,
+            BAM_QC.out.verifybam_id_output.flatten().collect(),
+            BAM_QC.out.edited_qualimap_output.collect()
     )
 
     if(params.genotyping_mode == 'single'){
@@ -295,7 +300,7 @@ workflow TARGETED_ANALYSIS {
         MITOCALLER_ANALYSIS.out.mitocaller_filtered_output
         CHECK_FILE_VALIDITY.out.version_txt
         CHECK_FILE_VALIDITY.out.params_log
-        CHECK_FILE_VALIDITY.out.check_file_validity_wes_singlesample_output
+        CHECK_FILE_VALIDITY.out.check_file_validity_wes_output
 
         versions = ch_versions
 }
