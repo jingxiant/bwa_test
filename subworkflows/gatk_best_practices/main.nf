@@ -3,6 +3,7 @@ include { BASE_RECALIBRATOR } from "../../modules/bqsr_wes"
 include { APPLY_BQSR } from "../../modules/apply_bqsr_wes"
 include { HAPLOTYPECALLER } from "../../modules/haplotypecaller_wes"
 include { GENOTYPEGVCFS } from "../../modules/genotypegvcfs_wes"
+include { GENOTYPEGVCFS_WES_SINGLE_OR_COHORT } from "../../modules/genotypegvcfs_single_or_cohort"
 
 workflow GATK_BEST_PRACTICES {
 
@@ -31,7 +32,16 @@ workflow GATK_BEST_PRACTICES {
   HAPLOTYPECALLER(APPLY_BQSR.out[0], ref_genome, ref_genome_index, known_snps_dbsnp_index, known_indels_index, known_snps_dbsnp, known_indels, target_bed)
   ch_versions = ch_versions.mix(HAPLOTYPECALLER.out.versions)
 
-  GENOTYPEGVCFS(HAPLOTYPECALLER.out[1].collect(),HAPLOTYPECALLER.out[2].collect(), ref_genome, target_bed, params.proband)
+  if(params.genotyping_mode == 'single') {
+    GENOTYPEGVCFS_WES_SINGLE_OR_COHORT(HAPLOTYPECALLER_WES.out[0], HAPLOTYPECALLER_WES.out[1], HAPLOTYPECALLER_WES.out[2], ref_fa, target_bed)
+  }       
+  
+  if(params.genotyping_mode == 'joint'){
+    GENOTYPEGVCFS_WES_SINGLE_OR_COHORT(HAPLOTYPECALLER_WES.out[0].collect(), HAPLOTYPECALLER_WES.out[1].collect(), HAPLOTYPECALLER_WES.out[2].collect(), ref_fa, target_bed)
+  }
+
+  //GENOTYPEGVCFS(HAPLOTYPECALLER.out[1].collect(),HAPLOTYPECALLER.out[2].collect(), ref_genome, target_bed, params.proband)
+  
   ch_versions = ch_versions.mix(GENOTYPEGVCFS.out.versions)
 
   emit:
@@ -40,7 +50,7 @@ workflow GATK_BEST_PRACTICES {
   bqsr_bam                 = APPLY_BQSR.out[0]
   gvcf_file                = HAPLOTYPECALLER.out[1]
   gvcf_index               = HAPLOTYPECALLER.out[2]
-  raw_vcf                  = GENOTYPEGVCFS.out[0]
+  raw_vcf                  = GENOTYPEGVCFS_WES_SINGLE_OR_COHORT.out[0]
   
   versions                 = ch_versions
 }
