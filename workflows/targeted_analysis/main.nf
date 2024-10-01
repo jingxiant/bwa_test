@@ -232,6 +232,10 @@ workflow TARGETED_ANALYSIS {
                                      }
       }
 
+    if(params.genotyping_mode == 'joint'){
+        ch_for_filecheck_processed = ''
+    }
+
     CHECK_FILE_VALIDITY(
             tool_versions_ch, 
             modify_versions_log_script, 
