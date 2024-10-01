@@ -28,11 +28,25 @@ workflow CHECK_FILE_VALIDITY {
       tabulate_samples_quality_script, 
       check_sample_stats_script
       )
+    check_file_validity_wes_output = CHECK_FILE_VALIDITY_WES_SINGLESAMPLE.out[0]
   }
+
+  if(params.genotyping_mode == 'joint'){
+    CHECK_FILE_VALIDITY_WES_MULTISAMPLE(
+      ch_depth_of_coverage, 
+      ch_vcf_filtered_tsv, 
+      ch_decom_norm_vcf, 
+      ch_verifybamid_wes, 
+      ch_edit_qualimap, 
+      check_file_status_script,
+      tabulate_samples_quality_script,
+      check_sample_stats_script
+    check_file_validity_wes_output = CHECK_FILE_VALIDITY_WES_MULTISAMPLE.out[0]
+    )
   
   emit:
   version_txt                                  = GET_TOOLS_VERSION.out[0]
   params_log                                   = LOG_PARAMS.out
-  check_file_validity_wes_singlesample_output  = CHECK_FILE_VALIDITY_WES_SINGLESAMPLE.out[0]
+  check_file_validity_wes_output 
   
 }
