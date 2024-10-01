@@ -23,5 +23,5 @@ workflow GENERATE_REPORT {
 
   emit:
   sample_report_singlesample      = GENERATE_REPORT_RMARKDOWN_SINGLESAMPLE.out[0]
-  sample_report_multisample       = GENERATE_REPORT_RMARKDOWN_MULTISAMPLE.out[0]
+ // sample_report_multisample       = GENERATE_REPORT_RMARKDOWN_MULTISAMPLE.out[0]
 }
