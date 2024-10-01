@@ -163,7 +163,7 @@ workflow TARGETED_ANALYSIS {
     )
     ch_versions = ch_versions.mix(EXOMEDEPTH_CNV_CALLING.out.versions)
 
-    ch_merged_tsv = EXOMEDEPTH_CNV_CALLING.out.exomedepth_merged_tsv
+    ch_merged_tsv = EXOMEDEPTH_CNV_CALLING.out.exomedepth_merged_tsv.flatten()
     SVAFOTATE(
         ch_merged_tsv,
         convert_tsv_to_vcf_script_for_exomedepth,
