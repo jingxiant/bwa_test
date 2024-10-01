@@ -274,7 +274,7 @@ workflow TARGETED_ANALYSIS {
         panel,
         CHECK_FILE_VALIDITY.out.version_txt,
         BAM_QC.out.depth_of_coverage_stats.flatten().collect(),
-        CHECK_FILE_VALIDITY.out.params_log
+        GENERATE_REPORT.out.check_file_validity_wes_output
     )
 
     emit:
