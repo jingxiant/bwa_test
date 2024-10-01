@@ -300,7 +300,7 @@ workflow TARGETED_ANALYSIS {
         CHECK_FILE_VALIDITY.out.version_txt
         CHECK_FILE_VALIDITY.out.params_log
         CHECK_FILE_VALIDITY.out.check_file_validity_wes_singlesample_output
-        CHECK_FILE_VALIDITY.out.check_file_validity_wes_multisample_output
+        //CHECK_FILE_VALIDITY.out.check_file_validity_wes_multisample_output
 
         versions = ch_versions
 }
