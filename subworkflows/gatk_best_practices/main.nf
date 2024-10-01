@@ -33,11 +33,11 @@ workflow GATK_BEST_PRACTICES {
   ch_versions = ch_versions.mix(HAPLOTYPECALLER.out.versions)
 
   if(params.genotyping_mode == 'single') {
-    GENOTYPEGVCFS_WES_SINGLE_OR_COHORT(HAPLOTYPECALLER_WES.out[0], HAPLOTYPECALLER_WES.out[1], HAPLOTYPECALLER_WES.out[2], ref_fa, target_bed)
+    GENOTYPEGVCFS_WES_SINGLE_OR_COHORT(HAPLOTYPECALLER.out[0], HAPLOTYPECALLER.out[1], HAPLOTYPECALLER.out[2], ref_fa, target_bed)
   }       
   
   if(params.genotyping_mode == 'joint'){
-    GENOTYPEGVCFS_WES_SINGLE_OR_COHORT(HAPLOTYPECALLER_WES.out[0].collect(), HAPLOTYPECALLER_WES.out[1].collect(), HAPLOTYPECALLER_WES.out[2].collect(), ref_fa, target_bed)
+    GENOTYPEGVCFS_WES_SINGLE_OR_COHORT(HAPLOTYPECALLER.out[0].collect(), HAPLOTYPECALLER.out[1].collect(), HAPLOTYPECALLER.out[2].collect(), ref_fa, target_bed)
   }
 
   //GENOTYPEGVCFS(HAPLOTYPECALLER.out[1].collect(),HAPLOTYPECALLER.out[2].collect(), ref_genome, target_bed, params.proband)
