@@ -35,7 +35,7 @@ workflow EXOMEDEPTH_POSTPROCESS {
   if(params.genotyping_mode == 'joint'){
     exomedepth_ch.view()
     EXOMEDEPTH_POSTPROCESS_COHORT(exomedepth_ch, ch_vcf_filtered_tsv, process_script_single, panel, clingen, mutation_spectrum, decipher)
-    //postprocess_result = EXOMEDEPTH_POSTPROCESS_COHORT.out
+    postprocess_result = EXOMEDEPTH_POSTPROCESS_COHORT.out
   }
 
   EXOMEDEPTH_FILTER_FOR_GSEAPY(exomedepth_ch, exomedepth_annotate_counts_script, exomedepth_deletion_db, exomedepth_duplication_db)
