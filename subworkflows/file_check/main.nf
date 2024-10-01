@@ -33,20 +33,6 @@ workflow CHECK_FILE_VALIDITY {
       check_sample_stats_script
       )
   }
-
-  /*if(params.genotyping_mode == 'joint'){
-    CHECK_FILE_VALIDITY_WES_MULTISAMPLE(
-      ch_depth_of_coverage, 
-      ch_vcf_filtered_tsv, 
-      ch_decom_norm_vcf, 
-      ch_verifybamid_wes, 
-      ch_edit_qualimap, 
-      check_file_status_script,
-      tabulate_samples_quality_script,
-      check_sample_stats_script
-    )
-  }*/
-
   
   emit:
   version_txt                                  = GET_TOOLS_VERSION.out[0]
