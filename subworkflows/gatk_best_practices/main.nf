@@ -42,7 +42,7 @@ workflow GATK_BEST_PRACTICES {
 
   //GENOTYPEGVCFS(HAPLOTYPECALLER.out[1].collect(),HAPLOTYPECALLER.out[2].collect(), ref_genome, target_bed, params.proband)
   
-  ch_versions = ch_versions.mix(GENOTYPEGVCFS.out.versions)
+  ch_versions = ch_versions.mix(GENOTYPEGVCFS_WES_SINGLE_OR_COHORT.out.versions)
 
   emit:
   marked_dup_bam           = MARK_DUPLICATES.out[0]
