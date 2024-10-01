@@ -8,7 +8,7 @@ process CHECK_FILE_VALIDITY_WES_MULTISAMPLE {
         file doc_samplesummary
         file filtered_tsv
         file decompose_normalized_vcf
-        file verifybamid
+        //file verifybamid
         file bamqc_stats
         file check_file_status_script
         file tabulate_samples_quality_script
