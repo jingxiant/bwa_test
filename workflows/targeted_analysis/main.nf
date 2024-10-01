@@ -263,7 +263,10 @@ workflow TARGETED_ANALYSIS {
 
     if(params.genotyping_mode == 'joint'){
         ch_for_rmarkdown_processed = Channel.empty()
-        BAM_QC.out.depth_of_coverage_stats.collect().flatten().view()
+        VEP_ANNOTATE.out.vep_tsv_filtered.view()
+        VCF_FILTER_AND_DECOMPOSE.out.decom_norm_vcf.view()
+        //BAM_QC.out.verifybam_id_output.collect().flatten(),
+        //BAM_QC.out.edited_qualimap_output.collect()
     }
     
     
