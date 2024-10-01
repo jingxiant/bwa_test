@@ -232,18 +232,14 @@ workflow TARGETED_ANALYSIS {
                                      }
       }
 
-    CHECK_FILE_VALIDITY(tool_versions_ch, 
+    CHECK_FILE_VALIDITY(
+            tool_versions_ch, 
             modify_versions_log_script, 
             parameters_file, 
             ch_for_filecheck_processed, 
             check_file_status_script, 
             tabulate_samples_quality_script, 
             check_sample_stats_script,
-            BAM_QC.out.depth_of_coverage_stats.flatten(), 
-            VEP_ANNOTATE.out.vep_tsv_filtered, 
-            VCF_FILTER_AND_DECOMPOSE.out.decom_norm_vcf,
-            BAM_QC.out.verifybam_id_output.flatten().collect(),
-            BAM_QC.out.edited_qualimap_output.collect()
     )
 
     if(params.genotyping_mode == 'single'){
