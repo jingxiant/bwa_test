@@ -34,7 +34,7 @@ workflow CHECK_FILE_VALIDITY {
       )
   }
 
-  if(params.genotyping_mode == 'joint'){
+  /*if(params.genotyping_mode == 'joint'){
     CHECK_FILE_VALIDITY_WES_MULTISAMPLE(
       ch_depth_of_coverage, 
       ch_vcf_filtered_tsv, 
@@ -45,7 +45,7 @@ workflow CHECK_FILE_VALIDITY {
       tabulate_samples_quality_script,
       check_sample_stats_script
     )
-  }
+  }*/
 
   
   emit:
