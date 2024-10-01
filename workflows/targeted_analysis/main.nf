@@ -263,6 +263,7 @@ workflow TARGETED_ANALYSIS {
 
     if(params.genotyping_mode == 'joint'){
         ch_for_rmarkdown_processed = Channel.empty()
+        BAM_QC.out.depth_of_coverage_stats.collect().flatten().view()
     }
     
     
