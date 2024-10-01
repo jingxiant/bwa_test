@@ -244,10 +244,10 @@ workflow TARGETED_ANALYSIS {
             check_file_status_script, 
             tabulate_samples_quality_script, 
             check_sample_stats_script,
-            BAM_QC.out.depth_of_coverage_stats.flatten().collect(), 
+            BAM_QC.out.depth_of_coverage_stats.collect().flatten(), 
             VEP_ANNOTATE.out.vep_tsv_filtered, 
             VCF_FILTER_AND_DECOMPOSE.out.decom_norm_vcf,
-            BAM_QC.out.verifybam_id_output.flatten().collect(),
+            BAM_QC.out.verifybam_id_output.collect().flatten(),
             BAM_QC.out.edited_qualimap_output.collect()
     )
 
