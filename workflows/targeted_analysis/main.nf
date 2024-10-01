@@ -238,7 +238,7 @@ workflow TARGETED_ANALYSIS {
             ch_for_filecheck_processed, 
             check_file_status_script, 
             tabulate_samples_quality_script, 
-            check_sample_stats_script
+            check_sample_stats_script,
             BAM_QC.out.depth_of_coverage_stats.flatten(), 
             VEP_ANNOTATE.out.vep_tsv_filtered, 
             VCF_FILTER_AND_DECOMPOSE.out.decom_norm_vcf,
@@ -252,7 +252,7 @@ workflow TARGETED_ANALYSIS {
                                                   def sampleName = tuple[0]
                                                   def allFiles = tuple[1..-1].collectMany { it instanceof List ? it : [it] }
                                                   [sampleName, allFiles]
-                                    }         
+                                    }
     }
     
     
