@@ -169,15 +169,14 @@ workflow TARGETED_ANALYSIS {
         convert_tsv_to_vcf_script_for_exomedepth,
         svafotate_bed
     )
-
-    /*if(params.genotyping_mode == 'single'){
+    SVAFOTATE.out.svafotate_vcf.view
+    
+    if(params.genotyping_mode == 'single'){
         ch_for_exomedepth_postprocess = VEP_ANNOTATE.out.vep_tsv_filtered
     }else if(params.genotyping_mode == 'joint'){
         ch_for_exomedepth_postprocess = VEP_ANNOTATE.out.vep_tsv_filtered_without_samplename
-    }*/
+    }
 
-    ch_for_exomedepth_postprocess = VEP_ANNOTATE.out.vep_tsv_filtered
-    
     EXOMEDEPTH_POSTPROCESS(
         ch_merged_tsv,
         SVAFOTATE.out.svafotate_vcf,
