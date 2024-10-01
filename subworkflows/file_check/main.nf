@@ -14,6 +14,11 @@ workflow CHECK_FILE_VALIDITY {
   check_file_status_script
   tabulate_samples_quality_script
   check_sample_stats_script
+  ch_depth_of_coverage
+  ch_vcf_filtered_tsv
+  ch_decom_norm_vcf
+  ch_verifybamid_wes
+  ch_edit_qualimap
   
   main:
   GET_TOOLS_VERSION(ch_versions_log, modify_versions_log_script)
@@ -21,11 +26,29 @@ workflow CHECK_FILE_VALIDITY {
   LOG_PARAMS(parameters_file)
 
   if(params.genotyping_mode == 'single'){
-    CHECK_FILE_VALIDITY_WES_SINGLESAMPLE(ch_for_filecheck, check_file_status_script,tabulate_samples_quality_script, check_sample_stats_script)
+    CHECK_FILE_VALIDITY_WES_SINGLESAMPLE(
+      ch_for_filecheck, 
+      check_file_status_script,
+      tabulate_samples_quality_script, 
+      check_sample_stats_script
+      )
   }
 
+  if(params.genotyping_mode == 'joint'){
+    CHECK_FILE_VALIDITY_WES_MULTISAMPLE(
+      ch_depth_of_coverage, 
+      ch_vcf_filtered_tsv, 
+      ch_decom_norm_vcf, 
+      ch_verifybamid_wes, 
+      ch_edit_qualimap, 
+      check_file_status_script,
+      tabulate_samples_quality_script,
+      check_sample_stats_script)
+  }
+  
   emit:
-  version_txt                                 = GET_TOOLS_VERSION.out[0]
-  params_log                                  = LOG_PARAMS.out
+  version_txt                                  = GET_TOOLS_VERSION.out[0]
+  params_log                                   = LOG_PARAMS.out
   check_file_validity_wes_singlesample_output  = CHECK_FILE_VALIDITY_WES_SINGLESAMPLE.out[0]
+  check_file_validity_wes_multisample_output   = CHECK_FILE_VALIDITY_WES_MULTISAMPLE.out[0]
 }
