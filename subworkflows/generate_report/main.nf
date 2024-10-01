@@ -14,14 +14,27 @@ workflow GENERATE_REPORT {
   
   main:
   if(params.genotyping_mode == 'single'){
-    GENERATE_REPORT_RMARKDOWN_SINGLESAMPLE(ch_for_rmarkdown, rmd_template, resources_log, panel)
+    GENERATE_REPORT_RMARKDOWN_SINGLESAMPLE(
+      ch_for_rmarkdown, 
+      rmd_template, 
+      resources_log, 
+      panel
+      )
+    sample_report = GENERATE_REPORT_RMARKDOWN_SINGLESAMPLE.out[0]
   }
 
   if(params.genotyping_mode == 'joint'){
-    GENERATE_REPORT_RMARKDOWN_MULTISAMPLE(rmd_template, versions_log, ch_sample_analysis_log, ch_depth_of_coverage, resources_log, panel)
+    GENERATE_REPORT_RMARKDOWN_MULTISAMPLE(
+      rmd_template, 
+      versions_log, 
+      ch_sample_analysis_log, 
+      ch_depth_of_coverage, 
+      resources_log, 
+      panel
+      )
+    sample_report = GENERATE_REPORT_RMARKDOWN_MULTISAMPLE.out[0]
   }
 
   emit:
-  sample_report_singlesample      = GENERATE_REPORT_RMARKDOWN_SINGLESAMPLE.out[0]
- // sample_report_multisample       = GENERATE_REPORT_RMARKDOWN_MULTISAMPLE.out[0]
+  sample_report
 }
