@@ -1,7 +1,8 @@
 process GENOTYPEGVCFS {
 
         container 'jxprismdocker/prism_bwa_gatk'
-        publishDir "$params.publishdir/jointcalling", mode: 'copy', exclude: '*.yml'
+        publishDir ( params.genotyping_mode == 'single' ? "$params.publishdir/$samplename/vcf" : "$params.publishdir/jointcalling" ), mode: 'copy'
+        //publishDir "$params.publishdir/jointcalling", mode: 'copy', exclude: '*.yml'
 
         input:
         file(gvcf)
