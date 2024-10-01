@@ -14,11 +14,7 @@ workflow CHECK_FILE_VALIDITY {
   check_file_status_script
   tabulate_samples_quality_script
   check_sample_stats_script
-  ch_depth_of_coverage
-  ch_vcf_filtered_tsv
-  ch_decom_norm_vcf
-  ch_verifybamid_wes
-  ch_edit_qualimap
+
   
   main:
   GET_TOOLS_VERSION(ch_versions_log, modify_versions_log_script)
