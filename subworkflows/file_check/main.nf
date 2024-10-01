@@ -43,7 +43,8 @@ workflow CHECK_FILE_VALIDITY {
       ch_edit_qualimap, 
       check_file_status_script,
       tabulate_samples_quality_script,
-      check_sample_stats_script)
+      check_sample_stats_script
+    )
   }
   
   emit:
