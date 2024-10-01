@@ -248,7 +248,8 @@ workflow TARGETED_ANALYSIS {
     )
 
     if(params.genotyping_mode == 'single'){
-        ch_for_rmarkdown_single_sample = CHECK_FILE_VALIDITY.out.check_file_validity_wes_singlesample_output.join(BAM_QC.out.depth_of_coverage_stats).combine(CHECK_FILE_VALIDITY.out.version_txt)
+        //ch_for_rmarkdown_single_sample = CHECK_FILE_VALIDITY.out.check_file_validity_wes_singlesample_output.join(BAM_QC.out.depth_of_coverage_stats).combine(CHECK_FILE_VALIDITY.out.version_txt)
+        ch_for_rmarkdown_single_sample = CHECK_FILE_VALIDITY.out.check_file_validity_wes_output.join(BAM_QC.out.depth_of_coverage_stats).combine(CHECK_FILE_VALIDITY.out.version_txt)
         ch_for_rmarkdown_processed = ch_for_rmarkdown_single_sample.map { tuple ->
                                                   def sampleName = tuple[0]
                                                   def allFiles = tuple[1..-1].collectMany { it instanceof List ? it : [it] }
