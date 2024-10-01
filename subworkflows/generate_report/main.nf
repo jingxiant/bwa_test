@@ -10,7 +10,7 @@ workflow GENERATE_REPORT {
   panel
   versions_log
   ch_depth_of_coverage
-  ch_sample_analysis_log
+  ch_check_file_output
   
   main:
   if(params.genotyping_mode == 'single'){
@@ -27,7 +27,7 @@ workflow GENERATE_REPORT {
     GENERATE_REPORT_RMARKDOWN_MULTISAMPLE(
       rmd_template, 
       versions_log, 
-      ch_sample_analysis_log, 
+      ch_check_file_output, 
       ch_depth_of_coverage, 
       resources_log, 
       panel
