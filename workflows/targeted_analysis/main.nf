@@ -230,7 +230,7 @@ workflow TARGETED_ANALYSIS {
                                                 def allFiles = tuple[1..-1].collectMany { it instanceof List ? it : [it] }
                                                 [sampleName, allFiles]
                                      }
-    } 
+      }
 
     CHECK_FILE_VALIDITY(tool_versions_ch, 
             modify_versions_log_script, 
@@ -238,7 +238,13 @@ workflow TARGETED_ANALYSIS {
             ch_for_filecheck_processed, 
             check_file_status_script, 
             tabulate_samples_quality_script, 
-            check_sample_stats_script)
+            check_sample_stats_script
+            BAM_QC.out.depth_of_coverage_stats.flatten(), 
+            VEP_ANNOTATE.out.vep_tsv_filtered, 
+            VCF_FILTER_AND_DECOMPOSE.out.decom_norm_vcf,
+            BAM_QC.out.verifybam_id_output.flatten().collect(),
+            BAM_QC.out.edited_qualimap_output.collect()
+    )
 
     if(params.genotyping_mode == 'single'){
         ch_for_rmarkdown_single_sample = CHECK_FILE_VALIDITY.out.check_file_validity_wes_singlesample_output.join(BAM_QC.out.depth_of_coverage_stats).combine(CHECK_FILE_VALIDITY.out.version_txt)
@@ -246,15 +252,20 @@ workflow TARGETED_ANALYSIS {
                                                   def sampleName = tuple[0]
                                                   def allFiles = tuple[1..-1].collectMany { it instanceof List ? it : [it] }
                                                   [sampleName, allFiles]
-                                                  }         
+                                    }         
     }
+    
+    
     GENERATE_REPORT(
         ch_for_rmarkdown_processed,
         rmd_template,
         CHECK_FILE_VALIDITY.out.params_log,
-        panel
+        panel,
+        CHECK_FILE_VALIDITY.out.version_txt,
+        BAM_QC.out.depth_of_coverage_stats.flatten().collect(),
+        CHECK_FILE_VALIDITY.out.params_log
     )
-    
+
     emit:
         GATK_BEST_PRACTICES.out.bqsr_recal_table
         GATK_BEST_PRACTICES.out.bqsr_bam
@@ -289,6 +300,7 @@ workflow TARGETED_ANALYSIS {
         CHECK_FILE_VALIDITY.out.version_txt
         CHECK_FILE_VALIDITY.out.params_log
         CHECK_FILE_VALIDITY.out.check_file_validity_wes_singlesample_output
+        CHECK_FILE_VALIDITY.out.check_file_validity_wes_multisample_output
 
         versions = ch_versions
 }
