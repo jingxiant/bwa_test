@@ -26,7 +26,7 @@ workflow CHECK_FILE_VALIDITY {
   LOG_PARAMS(parameters_file)
 
   if(params.genotyping_mode == 'single'){
-    check_file_validity_wes_output = CHECK_FILE_VALIDITY_WES_SINGLESAMPLE(
+    CHECK_FILE_VALIDITY_WES_SINGLESAMPLE(
       ch_for_filecheck, 
       check_file_status_script,
       tabulate_samples_quality_script, 
@@ -35,7 +35,7 @@ workflow CHECK_FILE_VALIDITY {
   }
 
   if(params.genotyping_mode == 'joint'){
-    check_file_validity_wes_output = CHECK_FILE_VALIDITY_WES_MULTISAMPLE(
+    CHECK_FILE_VALIDITY_WES_MULTISAMPLE(
       ch_depth_of_coverage, 
       ch_vcf_filtered_tsv, 
       ch_decom_norm_vcf, 
@@ -46,10 +46,11 @@ workflow CHECK_FILE_VALIDITY {
       check_sample_stats_script
     )
   }
+
   
   emit:
   version_txt                                  = GET_TOOLS_VERSION.out[0]
   params_log                                   = LOG_PARAMS.out
-  check_file_validity_wes_singlesample_output  = check_file_validity_wes_output
+  check_file_validity_wes_singlesample_output  = CHECK_FILE_VALIDITY_WES_SINGLESAMPLE.out[0]
   }
 }
