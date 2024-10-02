@@ -25,15 +25,14 @@ process GENOTYPEGVCFS_WES_SINGLE_OR_COHORT {
                 
                 cat <<-END_VERSIONS > versions.yml
                         ${task.process}\tgatk:\$(echo \$(gatk --version 2>&1) | sed 's/^.*(GATK) v//; s/ .*\$//')
-                END_VERSIONS
         """
         }
         else if(params.genotyping_mode == 'single'){
         """
                 gatk GenotypeGVCFs -R $params.ref -V ${gvcf} -O ${samplename}.${params.timestamp}.raw.vcf.gz -L $target_bed
+                
                 cat <<-END_VERSIONS > versions.yml
                         ${task.process}\tgatk:\$(echo \$(gatk --version 2>&1) | sed 's/^.*(GATK) v//; s/ .*\$//')
-                END_VERSIONS
         """
         }
 }
